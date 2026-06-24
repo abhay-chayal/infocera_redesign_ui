@@ -1,4 +1,4 @@
-import { Zap, Shield, Activity, TrendingUp } from 'lucide-react';
+// unused imports removed
 
 export const portfolioDetailsData: Record<string, any> = {
   'healthsync': {

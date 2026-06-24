@@ -10,7 +10,7 @@ export default function BlogDetail() {
   if (!slug) return <Navigate to="/blog" replace />;
 
   // Find the article metadata
-  const articleMeta = blogPageData.articles.find(a => a.id === slug) || 
+  const articleMeta: any = blogPageData.articles.find(a => a.id === slug) || 
                       (blogPageData.featuredArticle.id === slug ? blogPageData.featuredArticle : null);
                       
   const articleContent = blogDetailsData[slug];

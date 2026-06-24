@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code2, Cloud, Database, ShieldCheck, Zap, Globe, Cpu, Server, Lock, Layers, Smartphone, Infinity, TestTube2, Rocket, ArrowRight, CheckCircle2, ChevronDown, Layers as LayersIcon, LayoutGrid } from 'lucide-react';
+import { Code2, Cloud, Database, ShieldCheck, Zap, Globe, Cpu, Server, Lock, Layers, Smartphone, Infinity, TestTube2, Rocket, ArrowRight, CheckCircle2, Layers as LayersIcon, LayoutGrid } from 'lucide-react';
 
 export interface TechHeroData {
   badge: string;
