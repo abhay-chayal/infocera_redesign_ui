@@ -1,0 +1,9 @@
+{
+  "name": "infocera-redesign-ui",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
