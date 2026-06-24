@@ -1,5 +1,5 @@
 import React from 'react';
-import type {  } from '../../types/service';
+import type { Technology } from '../../types/service';
 import { Container } from '../../components/shared/Container';
 import { Section } from '../../components/shared/Section';
 import { SectionHeader } from '../../components/shared/SectionHeader';

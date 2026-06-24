@@ -80,7 +80,7 @@ export const PortfolioGrid = () => {
                 </p>
                 
                 <Button 
-                  href={project.href}
+                  href={`/portfolio/${project.id}`}
                   variant="link"
                   className="p-0 h-auto min-h-0 text-white/60 group-hover:text-fuchsia-400 uppercase tracking-wider mt-auto no-underline hover:no-underline justify-start gap-2 text-sm w-fit"
                   rightIcon={<ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-300" />}

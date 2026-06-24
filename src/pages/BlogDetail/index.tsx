@@ -44,7 +44,7 @@ export default function BlogDetail() {
           <div className="flex flex-wrap items-center gap-6 text-gray-400 text-sm border-y border-white/10 py-6">
             <div className="flex items-center gap-3">
               {'authorAvatar' in articleMeta ? (
-                <img src={articleMeta.authorAvatar} alt={articleMeta.author} className="w-10 h-10 rounded-full object-cover" />
+                <img src={(articleMeta as any).authorAvatar as string} alt={articleMeta.author} className="w-10 h-10 rounded-full object-cover" />
               ) : (
                 <div className="w-10 h-10 rounded-full bg-indigo-900 flex items-center justify-center text-indigo-300 font-bold">
                   {articleMeta.author.charAt(0)}
@@ -52,7 +52,7 @@ export default function BlogDetail() {
               )}
               <div>
                 <div className="font-bold text-white">{articleMeta.author}</div>
-                {'authorRole' in articleMeta && <div className="text-xs text-gray-500">{articleMeta.authorRole}</div>}
+                {'authorRole' in articleMeta && <div className="text-xs text-gray-500">{(articleMeta as any).authorRole}</div>}
               </div>
             </div>
             

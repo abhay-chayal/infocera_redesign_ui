@@ -1,8 +1,8 @@
-import React from 'react';
+
 import { motion } from 'framer-motion';
 import { fadeInUp, staggerContainer } from '../../utils/animations';
 import { Button } from '../shared/Button';
-import { ArrowRight, CheckCircle2, ChevronRight, MessageSquare, Code2, ShieldCheck, Zap, Globe, Database, Server } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ChevronRight, MessageSquare, Zap, Globe, Database, Server } from 'lucide-react';
 import type { ConsultingTechnologyData } from '../../data/consultingTechnologyData';
 
 // 1. TechnologyHeroBlock

@@ -1,5 +1,5 @@
 import React from 'react';
-import type {  } from '../../types/service';
+import type { ArchitectureNode } from '../../types/service';
 import { Container } from '../../components/shared/Container';
 import { Section } from '../../components/shared/Section';
 import { SectionHeader } from '../../components/shared/SectionHeader';
@@ -21,7 +21,7 @@ export const ArchitectureDiagramBlock: React.FC<ArchitectureDiagramBlockProps> =
         
         <div className="max-w-4xl mx-auto mt-20">
           <div className="flex flex-col items-center">
-            {data.map((node, index) => {
+            {data.map((node) => {
               const hasNext = node.next && node.next.length > 0;
               return (
                 <React.Fragment key={node.id}>

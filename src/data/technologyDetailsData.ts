@@ -1,4 +1,4 @@
-import { Code2, Cloud, Database, ShieldCheck, Zap, Globe, Cpu, Server, Lock, Layers, Smartphone, Infinity, TestTube2, Rocket } from 'lucide-react';
+import { Code2, Cloud, Database, ShieldCheck, Zap, Globe, Cpu, Server, Lock, Layers, TestTube2, Rocket } from 'lucide-react';
 import React from 'react';
 
 export interface TechFeature {

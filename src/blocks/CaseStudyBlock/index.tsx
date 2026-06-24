@@ -1,5 +1,5 @@
 import React from 'react';
-import type {  } from '../../types/service';
+import type { CaseStudy } from '../../types/service';
 import { Container } from '../../components/shared/Container';
 import { Section } from '../../components/shared/Section';
 import { Button } from '../../components/shared/Button';
@@ -35,7 +35,7 @@ export const CaseStudyBlock: React.FC<CaseStudyBlockProps> = ({ data }) => {
             </p>
             
             <div className="grid sm:grid-cols-2 gap-6 mb-12">
-              {data.results.map((result, index) => (
+              {data.results.map((result: string, index: number) => (
                 <div key={index} className="flex items-center gap-3">
                   <CheckCircle2 className="w-6 h-6 text-indigo-400 flex-shrink-0" />
                   <span className="text-lg text-white font-medium">{result}</span>

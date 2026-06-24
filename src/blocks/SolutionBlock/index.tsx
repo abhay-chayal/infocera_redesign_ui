@@ -1,5 +1,5 @@
 import React from 'react';
-import type {  } from '../../types/service';
+import type { SolutionData } from '../../types/service';
 import { Container } from '../../components/shared/Container';
 import { Section } from '../../components/shared/Section';
 import { SectionHeader } from '../../components/shared/SectionHeader';
@@ -24,7 +24,7 @@ export const SolutionBlock: React.FC<SolutionBlockProps> = ({ data }) => {
         </div>
         
         <div className="grid md:grid-cols-2 gap-8 mt-12">
-          {data.highlights.map((highlight, index) => (
+          {data.highlights.map((highlight: { title: string; description: string }, index: number) => (
             <div key={index} className="p-8 rounded-3xl bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-white/10">
               <div className="flex items-center gap-4 mb-4">
                 <CheckCircle2 className="w-8 h-8 text-indigo-400" />

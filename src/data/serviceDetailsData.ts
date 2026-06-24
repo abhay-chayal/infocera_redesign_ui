@@ -1,4 +1,4 @@
-import type {  } from '../types/service';
+import type { ServicePageData } from '../types/service';
 
 export const serviceDetailsData: Record<string, ServicePageData> = {
   'custom-software-development': {

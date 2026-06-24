@@ -1,5 +1,5 @@
 import React from 'react';
-import type {  } from '../../types/service';
+import type { ChallengeData } from '../../types/service';
 import { Container } from '../../components/shared/Container';
 import { Section } from '../../components/shared/Section';
 import { SectionHeader } from '../../components/shared/SectionHeader';
@@ -27,7 +27,7 @@ export const ChallengeBlock: React.FC<ChallengeBlockProps> = ({ data }) => {
           </div>
           
           <div className="space-y-6">
-            {data.points.map((point, index) => (
+            {data.points.map((point: string, index: number) => (
               <div key={index} className="flex items-start gap-4 p-6 rounded-2xl bg-white/5 border border-white/5">
                 <div className="flex-shrink-0 mt-1">
                   <XCircle className="w-6 h-6 text-red-400" />
