@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { careersPageData } from '../../data/careersPageData';
+import { useState, useEffect } from 'react';
+import { supabase } from '../../lib/supabase';
 import { Search, MapPin, Briefcase, ChevronDown } from 'lucide-react';
 import { SectionHeader } from '../shared/SectionHeader';
 import { Button } from '../shared/Button';
@@ -10,9 +10,30 @@ export const OpenPositions = () => {
   const [activeDepartment, setActiveDepartment] = useState('All');
   const [expandedRole, setExpandedRole] = useState<string | null>(null);
 
-  const departments = ['All', ...new Set(careersPageData.openPositions.map(p => p.department))];
+  const [positions, setPositions] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const filteredRoles = careersPageData.openPositions.filter(role => {
+  useEffect(() => {
+    const fetchPositions = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('open_positions')
+          .select('*')
+          .order('created_at', { ascending: false });
+        if (error) throw error;
+        if (data) setPositions(data);
+      } catch (err) {
+        console.error("Error fetching positions:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchPositions();
+  }, []);
+
+  const departments = ['All', ...new Set(positions.map(p => p.department))];
+
+  const filteredRoles = positions.filter(role => {
     const matchesSearch = role.title.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesDept = activeDepartment === 'All' || role.department === activeDepartment;
     return matchesSearch && matchesDept;
@@ -36,8 +57,14 @@ export const OpenPositions = () => {
           align="center"
         />
 
-        {/* Search & Filters */}
-        <div className="flex flex-col md:flex-row gap-4 mb-12">
+        {isLoading ? (
+          <div className="flex justify-center py-20">
+            <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        ) : (
+          <>
+            {/* Search & Filters */}
+            <div className="flex flex-col md:flex-row gap-4 mb-12">
           <div className="relative flex-grow">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
             <input 
@@ -148,7 +175,7 @@ export const OpenPositions = () => {
                       <div>
                         <h4 className="text-sm font-bold uppercase tracking-wider text-blue-400 mb-4">Roles & Responsibilities</h4>
                         <ul className="space-y-3">
-                          {role.responsibilities.map((req, i) => (
+                          {role.responsibilities.map((req: string, i: number) => (
                             <li key={i} className="flex items-start gap-3 text-gray-300">
                               <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 shrink-0" />
                               <span>{req}</span>
@@ -161,7 +188,7 @@ export const OpenPositions = () => {
                         <div>
                           <h4 className="text-sm font-bold uppercase tracking-wider text-indigo-400 mb-4">Required Skills</h4>
                           <ul className="space-y-3">
-                            {role.skills.map((skill, i) => (
+                            {role.skills.map((skill: string, i: number) => (
                               <li key={i} className="flex items-start gap-3 text-gray-300">
                                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 mt-2 shrink-0" />
                                 <span>{skill}</span>
@@ -172,7 +199,7 @@ export const OpenPositions = () => {
                         <div>
                           <h4 className="text-sm font-bold uppercase tracking-wider text-fuchsia-400 mb-4">Desired Qualifications</h4>
                           <ul className="space-y-3">
-                            {role.qualifications.map((qual, i) => (
+                            {role.qualifications.map((qual: string, i: number) => (
                               <li key={i} className="flex items-start gap-3 text-gray-300">
                                 <span className="w-1.5 h-1.5 rounded-full bg-fuchsia-500 mt-2 shrink-0" />
                                 <span>{qual}</span>
@@ -200,8 +227,9 @@ export const OpenPositions = () => {
             </div>
           )}
         </div>
-
-      </div>
-    </section>
+      </>
+    )}
+  </div>
+</section>
   );
 };

@@ -5,19 +5,55 @@ import { navigationData } from '../../data/navigation';
 import { MobileMenu } from './MobileMenu';
 import { cn } from '../../utils/cn';
 import { Button } from './Button';
+import { supabase } from '../../lib/supabase';
 
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const [userRole, setUserRole] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    // Auth listener
+    const { data: authListener } = supabase.auth.onAuthStateChange(async (_, session) => {
+      if (session) {
+        setIsAuthenticated(true);
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('role')
+          .eq('id', session.user.id)
+          .single();
+        setUserRole(profile?.role || 'client');
+      } else {
+        setIsAuthenticated(false);
+        setUserRole(null);
+      }
+    });
+
+    // Check initial session
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (session) {
+        setIsAuthenticated(true);
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('role')
+          .eq('id', session.user.id)
+          .single();
+        setUserRole(profile?.role || 'client');
+      }
+    });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      authListener.subscription.unsubscribe();
+    };
   }, []);
 
   // Close mobile menu on route change
@@ -26,15 +62,27 @@ export const Navbar = () => {
     setActiveDropdown(null);
   }, [location.pathname]);
 
+  // Close mobile menu on desktop resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1280) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <header
-      className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-500",
-        scrolled
-          ? "bg-[#070b14]/40 backdrop-blur-xl border-b border-white/5 py-3 shadow-lg"
-          : "bg-gradient-to-b from-black/80 to-transparent py-5 border-none"
-      )}
-    >
+    <>
+      <header
+        className={cn(
+          "fixed top-0 z-50 w-full transition-all duration-700 border-b",
+          scrolled || isMobileMenuOpen
+            ? "bg-[#070b14]/60 backdrop-blur-xl border-white/10 py-3 shadow-2xl"
+            : "bg-[#070b14]/0 border-transparent py-5"
+        )}
+      >
       <div className="container mx-auto px-4 lg:px-8 flex items-center justify-between">
 
         {/* Brand Logo */}
@@ -164,12 +212,12 @@ export const Navbar = () => {
         {/* Desktop CTAs */}
         <div className="hidden xl:flex items-center space-x-6 ml-4">
           <Button
-            href="/login"
+            href={isAuthenticated ? (userRole === 'admin' ? '/admin' : '/dashboard') : '/login'}
             variant="secondary"
             size="sm"
             className="bg-[#6b21a8] hover:bg-[#581c87] rounded text-[15px] shadow-none hover:shadow-none hover:-translate-y-0"
           >
-            My Account
+            {isAuthenticated ? (userRole === 'admin' ? 'Admin Panel' : 'Dashboard') : 'My Account'}
           </Button>
           <Button variant="ghost" size="icon" className="text-white hover:text-purple-400 hover:bg-transparent" aria-label="Search">
             <Search className="w-5 h-5" />
@@ -197,6 +245,7 @@ export const Navbar = () => {
           </Button>
         </div>
       </div>
+    </header>
 
       {/* Mobile Menu Overlay */}
       <MobileMenu
@@ -204,6 +253,6 @@ export const Navbar = () => {
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
       />
-    </header>
+    </>
   );
 };

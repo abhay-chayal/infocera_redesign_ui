@@ -1,10 +1,8 @@
-import { blogPageData } from '../../data/blogPageData';
 import { ArrowRight, Clock, Calendar } from 'lucide-react';
 import { SectionHeader } from '../shared/SectionHeader';
 import { Button } from '../shared/Button';
 
-export const FeaturedArticle = () => {
-  const article = blogPageData.featuredArticle;
+export const FeaturedArticle = ({ article }: { article: any }) => {
 
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden bg-[#0f172a]">
@@ -37,11 +35,11 @@ export const FeaturedArticle = () => {
             <div className="flex flex-wrap items-center gap-4 text-sm font-medium text-gray-400 mb-6">
               <span className="flex items-center gap-1.5">
                 <Calendar className="w-4 h-4 text-indigo-400" />
-                {article.publishDate}
+                {new Date(article.publish_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
               </span>
               <span className="flex items-center gap-1.5">
                 <Clock className="w-4 h-4 text-fuchsia-400" />
-                {article.readingTime}
+                {article.reading_time}
               </span>
             </div>
 
@@ -57,18 +55,18 @@ export const FeaturedArticle = () => {
               {/* Author */}
               <div className="flex items-center gap-4">
                 <img 
-                  src={article.authorAvatar} 
+                  src={article.author_avatar || 'https://via.placeholder.com/150'} 
                   alt={article.author}
                   className="w-12 h-12 rounded-full border border-white/10 object-cover"
                 />
                 <div>
                   <h4 className="text-white font-bold">{article.author}</h4>
-                  <p className="text-sm text-gray-400">{article.authorRole}</p>
+                  <p className="text-sm text-gray-400">{article.author_role}</p>
                 </div>
               </div>
 
               <Button 
-                href={`/blog/${article.id}`}
+                href={`/blog/${article.slug}`}
                 variant="outline"
                 size="md"
                 className="rounded-full group/btn shrink-0"

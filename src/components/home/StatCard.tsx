@@ -4,7 +4,7 @@ import { motion, useMotionValue, useTransform, animate, useInView } from 'framer
 
 const AnimatedCounter = ({ value }: { value: string }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: "0px" });
   
   // Extract number and non-numeric parts from string like "500+" or "$50M"
   const numericMatch = value.match(/[\d,.]+/);

@@ -1,22 +1,48 @@
+import { useEffect, useState } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
-import { blogPageData } from '../../data/blogPageData';
-import { blogDetailsData } from '../../data/blogDetailsData';
+import { supabase } from '../../lib/supabase';
 import { ArrowLeft, Clock, Calendar, Share2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function BlogDetail() {
   const { slug } = useParams<{ slug: string }>();
+  const [article, setArticle] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
   
-  if (!slug) return <Navigate to="/blog" replace />;
+  useEffect(() => {
+    if (!slug) return;
+    
+    const fetchArticle = async () => {
+      setIsLoading(true);
+      try {
+        const { data, error } = await supabase
+          .from('blog_posts')
+          .select('*')
+          .eq('slug', slug)
+          .single();
+          
+        if (error || !data) throw error;
+        setArticle(data);
+      } catch (err) {
+        console.error("Error fetching article:", err);
+        setError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    fetchArticle();
+  }, [slug]);
 
-  // Find the article metadata
-  const articleMeta = blogPageData.articles.find(a => a.id === slug) || 
-                      (blogPageData.featuredArticle.id === slug ? blogPageData.featuredArticle : null);
-                      
-  const articleContent = blogDetailsData[slug];
+  if (!slug || error) return <Navigate to="/blog" replace />;
 
-  if (!articleMeta || !articleContent) {
-    return <Navigate to="/blog" replace />;
+  if (isLoading || !article) {
+    return (
+      <div className="flex flex-col w-full bg-[#0f172a] min-h-screen items-center justify-center">
+        <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
   }
 
   return (
@@ -33,36 +59,36 @@ export default function BlogDetail() {
         <header className="mb-12">
           <div className="flex items-center gap-4 mb-6">
             <span className="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-sm font-semibold tracking-wide">
-              {articleMeta.category}
+              {article.category}
             </span>
           </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-8 tracking-tight">
-            {articleMeta.title}
+            {article.title}
           </h1>
 
           <div className="flex flex-wrap items-center gap-6 text-gray-400 text-sm border-y border-white/10 py-6">
             <div className="flex items-center gap-3">
-              {'authorAvatar' in articleMeta ? (
-                <img src={(articleMeta as any).authorAvatar as string} alt={articleMeta.author} className="w-10 h-10 rounded-full object-cover" />
+              {article.author_avatar ? (
+                <img src={article.author_avatar} alt={article.author} className="w-10 h-10 rounded-full object-cover" />
               ) : (
                 <div className="w-10 h-10 rounded-full bg-indigo-900 flex items-center justify-center text-indigo-300 font-bold">
-                  {articleMeta.author.charAt(0)}
+                  {article.author?.charAt(0)}
                 </div>
               )}
               <div>
-                <div className="font-bold text-white">{articleMeta.author}</div>
-                {'authorRole' in articleMeta && <div className="text-xs text-gray-500">{(articleMeta as any).authorRole}</div>}
+                <div className="font-bold text-white">{article.author}</div>
+                {article.author_role && <div className="text-xs text-gray-500">{article.author_role}</div>}
               </div>
             </div>
             
             <div className="flex items-center gap-2 ml-auto">
               <Calendar className="w-4 h-4" />
-              {articleMeta.publishDate}
+              {new Date(article.publish_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
             </div>
             <div className="flex items-center gap-2">
               <Clock className="w-4 h-4" />
-              {articleMeta.readingTime}
+              {article.reading_time}
             </div>
           </div>
         </header>
@@ -73,13 +99,13 @@ export default function BlogDetail() {
           animate={{ opacity: 1, y: 0 }}
           className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden mb-16 border border-white/10"
         >
-          <img src={articleMeta.image} alt={articleMeta.title} className="w-full h-full object-cover" />
+          <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
         </motion.div>
 
         {/* Article Body */}
         <div 
           className="prose prose-invert prose-lg prose-indigo max-w-none"
-          dangerouslySetInnerHTML={{ __html: articleContent.content }}
+          dangerouslySetInnerHTML={{ __html: article.content }}
         />
 
         {/* Footer Actions */}

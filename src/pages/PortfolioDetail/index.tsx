@@ -1,5 +1,6 @@
+import { useEffect, useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import { portfolioDetailsData } from '../../data/portfolioDetailsData';
+import { supabase } from '../../lib/supabase';
 import { SectionHeader } from '../../components/shared/SectionHeader';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Button } from '../../components/shared/Button';
@@ -7,12 +8,44 @@ import { motion } from 'framer-motion';
 
 export default function PortfolioDetail() {
   const { slug } = useParams<{ slug: string }>();
+  const [project, setProject] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
   
-  if (!slug || !portfolioDetailsData[slug]) {
-    return <Navigate to="/portfolio" replace />;
-  }
+  useEffect(() => {
+    if (!slug) return;
+    
+    const fetchProject = async () => {
+      setIsLoading(true);
+      try {
+        const { data, error } = await supabase
+          .from('case_studies')
+          .select('*')
+          .eq('slug', slug)
+          .single();
+          
+        if (error || !data) throw error;
+        setProject(data);
+      } catch (err) {
+        console.error("Error fetching project:", err);
+        setError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    fetchProject();
+  }, [slug]);
 
-  const project = portfolioDetailsData[slug];
+  if (!slug || error) return <Navigate to="/portfolio" replace />;
+
+  if (isLoading || !project) {
+    return (
+      <div className="flex flex-col w-full bg-[#0f172a] min-h-screen items-center justify-center">
+        <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-[#0B1120] min-h-screen text-white pt-20">
@@ -21,7 +54,7 @@ export default function PortfolioDetail() {
         <div className="absolute inset-0 bg-indigo-900/40 mix-blend-multiply z-10" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-[#0B1120]/60 to-transparent z-20" />
         <img 
-          src={project.heroImage} 
+          src={project.hero_image} 
           alt={project.title} 
           className="w-full h-full object-cover"
         />
@@ -100,7 +133,7 @@ export default function PortfolioDetail() {
               <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
               <h3 className="text-xl font-bold text-white mb-8">Business Impact</h3>
               <div className="space-y-8 relative z-10">
-                {project.results.map((res: any, idx: number) => (
+                {project.results.map((res: { metric: string; description: string }, idx: number) => (
                   <div key={idx} className="flex flex-col">
                     <span className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-fuchsia-400 mb-2">
                       {res.metric}

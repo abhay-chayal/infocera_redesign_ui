@@ -31,7 +31,7 @@ export const HeroSection = () => {
         <motion.div 
           className="max-w-3xl mx-auto flex flex-col items-center"
           variants={staggerContainer}
-          initial="hidden"
+          initial="visible"
           animate="visible"
         >
           

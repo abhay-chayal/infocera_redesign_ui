@@ -1,15 +1,16 @@
 import { useState } from 'react';
-import { portfolioPageData } from '../../data/portfolioPageData';
 import { ArrowRight } from 'lucide-react';
 import { SectionHeader } from '../shared/SectionHeader';
 import { Button } from '../shared/Button';
 
-export const PortfolioGrid = () => {
+const CATEGORIES = ["All", "Healthcare", "FinTech", "E-commerce", "SaaS", "AI/ML"];
+
+export const PortfolioGrid = ({ projects }: { projects: any[] }) => {
   const [activeFilter, setActiveFilter] = useState("All");
 
   const filteredProjects = activeFilter === "All" 
-    ? portfolioPageData.projects 
-    : portfolioPageData.projects.filter(project => project.category === activeFilter);
+    ? projects 
+    : projects.filter(project => project.industry === activeFilter);
 
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden bg-[#0B1120]">
@@ -32,7 +33,7 @@ export const PortfolioGrid = () => {
 
           {/* Filter Bar */}
           <div className="flex flex-wrap gap-2">
-            {portfolioPageData.categories.map(category => (
+            {CATEGORIES.map(category => (
               <Button
                 key={category}
                 variant={activeFilter === category ? "secondary" : "outline"}
@@ -61,7 +62,7 @@ export const PortfolioGrid = () => {
               <div className="relative h-64 overflow-hidden">
                 <div className="absolute inset-0 bg-[#0f172a]/60 mix-blend-multiply group-hover:opacity-0 transition-opacity duration-500 z-10" />
                 <img 
-                  src={project.image} 
+                  src={project.hero_image} 
                   alt={project.title}
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                 />
@@ -75,12 +76,12 @@ export const PortfolioGrid = () => {
                 <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-gray-400 leading-relaxed mb-8 flex-grow">
-                  {project.summary}
+                <p className="text-gray-400 leading-relaxed mb-8 flex-grow line-clamp-3">
+                  {project.overview}
                 </p>
                 
                 <Button 
-                  href={`/portfolio/${project.id}`}
+                  href={`/portfolio/${project.slug}`}
                   variant="link"
                   className="p-0 h-auto min-h-0 text-white/60 group-hover:text-fuchsia-400 uppercase tracking-wider mt-auto no-underline hover:no-underline justify-start gap-2 text-sm w-fit"
                   rightIcon={<ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-300" />}

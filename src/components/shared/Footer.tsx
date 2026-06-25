@@ -10,7 +10,7 @@ export const Footer = () => {
     <footer className="bg-[#040811] text-gray-400 py-12 md:py-16 lg:py-20 border-t border-white/5">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Top Grid Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 md:gap-8 lg:gap-12 mb-16">
           
           {/* Company Branding & Social */}
           <div className="lg:col-span-2 flex flex-col space-y-6">

@@ -10,7 +10,7 @@ export const portfolioPageData = {
       id: "meditech-ai",
       title: "MediTech Diagnostic AI",
       industry: "Healthcare",
-      image: "https://images.unsplash.com/photo-1584982751601-97d8cb0f6669?q=80&w=2000&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=2000&q=80",
       challenge: "A leading hospital network struggled with a 48-hour backlog in radiology report analysis, directly impacting critical patient care timelines.",
       solution: "We engineered a HIPAA-compliant, custom Computer Vision pipeline using PyTorch that pre-analyzes scans and flags high-risk anomalies for radiologists in real-time.",
       results: [

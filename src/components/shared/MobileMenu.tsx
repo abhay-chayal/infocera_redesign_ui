@@ -86,21 +86,27 @@ export const MobileMenu = ({ items, isOpen, onClose }: MobileMenuProps) => {
           <div key={item.label} className="border-b border-white/10 py-3">
             {item.isMegaMenu || item.children ? (
               <div>
-                <button
-                  onClick={() => toggleDropdown(item.label)}
-                  className={cn(
-                    "flex items-center justify-between w-full text-left font-medium text-lg transition-colors",
-                    openDropdowns[item.label] ? "text-purple-400" : "text-white hover:text-purple-300"
-                  )}
-                  aria-expanded={openDropdowns[item.label]}
-                >
-                  {item.label}
-                  {openDropdowns[item.label] ? (
-                    <ChevronUp className="w-5 h-5 ml-2" />
-                  ) : (
-                    <ChevronDown className="w-5 h-5 ml-2" />
-                  )}
-                </button>
+                <div className="flex items-center justify-between w-full">
+                  <Link
+                    to={item.path}
+                    className="font-medium text-lg text-white hover:text-purple-400 transition-colors"
+                    onClick={onClose}
+                  >
+                    {item.label}
+                  </Link>
+                  <button
+                    onClick={() => toggleDropdown(item.label)}
+                    className="p-2 text-white hover:text-purple-300 transition-colors focus:outline-none"
+                    aria-expanded={openDropdowns[item.label]}
+                    aria-label={`Toggle ${item.label} menu`}
+                  >
+                    {openDropdowns[item.label] ? (
+                      <ChevronUp className="w-5 h-5" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5" />
+                    )}
+                  </button>
+                </div>
                 <div
                   className={cn(
                     'overflow-hidden transition-all duration-300 ease-in-out',

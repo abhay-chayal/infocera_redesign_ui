@@ -15,7 +15,7 @@ import { MetricsBlock } from '../../blocks/MetricsBlock';
 import { FAQBlock } from '../../blocks/FAQBlock';
 import { CTABlock } from '../../blocks/CTABlock';
 
-const SEOHead: React.FC<{ seo: any }> = ({ seo }) => {
+const SEOHead: React.FC<{ seo: { title: string; description: string; keywords: string[]; canonicalUrl?: string; } }> = ({ seo }) => {
   useEffect(() => {
     document.title = seo.title;
     

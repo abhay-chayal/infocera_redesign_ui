@@ -1,17 +1,49 @@
+import { useEffect, useState } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
-import { careersPageData } from '../../data/careersPageData';
+import { supabase } from '../../lib/supabase';
 import { ArrowLeft, MapPin, Briefcase, Building, CheckCircle2 } from 'lucide-react';
 import { Button } from '../../components/shared/Button';
+import { JobApplicationForm } from '../../components/careers/JobApplicationForm';
 
 export default function CareerDetail() {
   const { id } = useParams<{ id: string }>();
+  const [job, setJob] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
   
-  if (!id) return <Navigate to="/careers" replace />;
+  useEffect(() => {
+    if (!id) return;
+    
+    const fetchJob = async () => {
+      setIsLoading(true);
+      try {
+        const { data, error } = await supabase
+          .from('open_positions')
+          .select('*')
+          .eq('id', id)
+          .single();
+          
+        if (error || !data) throw error;
+        setJob(data);
+      } catch (err) {
+        console.error("Error fetching job:", err);
+        setError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    fetchJob();
+  }, [id]);
 
-  const job = careersPageData.openPositions.find(p => p.id === id);
+  if (!id || error) return <Navigate to="/careers" replace />;
 
-  if (!job) {
-    return <Navigate to="/careers" replace />;
+  if (isLoading || !job) {
+    return (
+      <div className="flex flex-col w-full bg-[#0f172a] min-h-screen items-center justify-center">
+        <div className="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
   }
 
   return (
@@ -46,7 +78,7 @@ export default function CareerDetail() {
           </div>
           
           <div className="mt-10">
-            <Button variant="primary" size="lg" className="w-full md:w-auto" onClick={() => alert("Application submitted! (UI Demo)")}>
+            <Button variant="primary" size="lg" className="w-full md:w-auto" onClick={() => document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' })}>
               Apply for this position
             </Button>
           </div>
@@ -64,7 +96,7 @@ export default function CareerDetail() {
           <section>
             <h2 className="text-2xl font-bold text-white mb-6">Key Responsibilities</h2>
             <ul className="space-y-4">
-              {job.responsibilities.map((req, idx) => (
+              {job.responsibilities.map((req: string, idx: number) => (
                 <li key={idx} className="flex items-start gap-3">
                   <CheckCircle2 className="w-6 h-6 text-indigo-400 shrink-0 mt-0.5" />
                   <span className="leading-relaxed">{req}</span>
@@ -76,7 +108,7 @@ export default function CareerDetail() {
           <section>
             <h2 className="text-2xl font-bold text-white mb-6">Required Skills</h2>
             <ul className="space-y-4">
-              {job.skills.map((skill, idx) => (
+              {job.skills.map((skill: string, idx: number) => (
                 <li key={idx} className="flex items-start gap-3">
                   <CheckCircle2 className="w-6 h-6 text-purple-400 shrink-0 mt-0.5" />
                   <span className="leading-relaxed">{skill}</span>
@@ -88,7 +120,7 @@ export default function CareerDetail() {
           <section>
             <h2 className="text-2xl font-bold text-white mb-6">Qualifications</h2>
             <ul className="space-y-4">
-              {job.qualifications.map((qual, idx) => (
+              {job.qualifications.map((qual: string, idx: number) => (
                 <li key={idx} className="flex items-start gap-3">
                   <CheckCircle2 className="w-6 h-6 text-fuchsia-400 shrink-0 mt-0.5" />
                   <span className="leading-relaxed">{qual}</span>
@@ -98,14 +130,8 @@ export default function CareerDetail() {
           </section>
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-16 pt-12 border-t border-white/10 text-center">
-          <h3 className="text-2xl font-bold text-white mb-4">Ready to make an impact?</h3>
-          <p className="text-gray-400 mb-8">Join our global team and help us build the future of enterprise software.</p>
-          <Button variant="primary" size="lg" onClick={() => alert("Application submitted! (UI Demo)")}>
-            Submit Application
-          </Button>
-        </div>
+        {/* Job Application Form */}
+        <JobApplicationForm jobId={job.id} />
 
       </div>
     </div>

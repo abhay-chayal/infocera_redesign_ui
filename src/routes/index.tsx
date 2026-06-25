@@ -16,6 +16,8 @@ import CareerDetail from '../pages/CareerDetail';
 import PrivacyPolicy from '../pages/PrivacyPolicy';
 import TermsOfService from '../pages/TermsOfService';
 import TechnologyDetail from '../pages/TechnologyDetail';
+import Admin from '../pages/Admin';
+import ClientDashboard from '../pages/ClientDashboard';
 
 export const router = createBrowserRouter([
   {
@@ -81,6 +83,14 @@ export const router = createBrowserRouter([
       {
         path: 'terms',
         element: <TermsOfService />,
+      },
+      {
+        path: 'admin',
+        element: <Admin />,
+      },
+      {
+        path: 'dashboard',
+        element: <ClientDashboard />,
       },
     ],
   },

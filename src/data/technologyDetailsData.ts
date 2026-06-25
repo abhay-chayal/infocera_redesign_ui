@@ -11,7 +11,7 @@ export interface TechnologyDetailData {
   title: string;
   category: string;
   description: string;
-  icon: React.FC<any>;
+  icon: React.FC<React.SVGProps<SVGSVGElement>>;
   heroImage: string;
   features: TechFeature[];
   benefits: string[];

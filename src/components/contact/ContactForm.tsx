@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { contactPageData } from '../../data/contactPageData';
 import { Send, Lock, ShieldCheck } from 'lucide-react';
 import { Button } from '../shared/Button';
+import { supabase } from '../../lib/supabase';
 
 export const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -20,11 +21,31 @@ export const ContactForm = () => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
+    
+    try {
+      const names = formData.fullName.trim().split(' ');
+      const firstName = names[0] || '';
+      const lastName = names.slice(1).join(' ') || '';
+
+      const { error } = await supabase
+        .from('contact_submissions')
+        .insert([
+          {
+            first_name: firstName,
+            last_name: lastName,
+            email: formData.email,
+            company: formData.company,
+            phone: formData.phone,
+            services: formData.service ? [formData.service] : [],
+            message: formData.message,
+          }
+        ]);
+
+      if (error) throw error;
+      
       setIsSubmitting(false);
       setIsSubmitted(true);
       setFormData({
@@ -38,7 +59,11 @@ export const ContactForm = () => {
       });
       // Reset success message after 5 seconds
       setTimeout(() => setIsSubmitted(false), 5000);
-    }, 1500);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setIsSubmitting(false);
+      alert('There was an error submitting your form. Please try again or email us directly.');
+    }
   };
 
   return (

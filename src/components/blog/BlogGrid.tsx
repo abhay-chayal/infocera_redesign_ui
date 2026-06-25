@@ -1,15 +1,24 @@
 import { useState } from 'react';
-import { blogPageData } from '../../data/blogPageData';
 import { Search, Clock, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '../shared/Button';
 import { Card } from '../shared/Card';
 
-export const BlogGrid = () => {
+const CATEGORIES = [
+  "All",
+  "Software Development",
+  "AI & Machine Learning",
+  "Cloud Computing",
+  "Data Engineering",
+  "DevOps",
+  "Industry Insights"
+];
+
+export const BlogGrid = ({ articles }: { articles: any[] }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
 
-  const filteredArticles = blogPageData.articles.filter(article => {
+  const filteredArticles = articles.filter(article => {
     const matchesSearch = article.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
                           article.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = activeCategory === 'All' || article.category === activeCategory;
@@ -23,7 +32,7 @@ export const BlogGrid = () => {
         {/* Search & Filters */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-16">
           <div className="flex overflow-x-auto pb-2 lg:pb-0 gap-3 md:gap-2 w-full lg:w-auto no-scrollbar shrink-0">
-            {blogPageData.categories.map(category => (
+            {CATEGORIES.map(category => (
               <Button
                 key={category}
                 variant={activeCategory === category ? "secondary" : "outline"}
@@ -58,7 +67,7 @@ export const BlogGrid = () => {
           {filteredArticles.length > 0 ? (
             filteredArticles.map(article => (
               <Link 
-                to={`/blog/${article.id}`}
+                to={`/blog/${article.slug}`}
                 key={article.id}
                 className="group block h-full"
               >
@@ -77,10 +86,10 @@ export const BlogGrid = () => {
 
                 <div className="p-8 flex flex-col flex-grow">
                   <div className="flex items-center gap-4 text-xs font-medium text-gray-400 mb-4">
-                    <span>{article.publishDate}</span>
+                    <span>{new Date(article.publish_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
                     <span className="flex items-center gap-1.5">
                       <Clock className="w-3.5 h-3.5 text-indigo-400" />
-                      {article.readingTime}
+                      {article.reading_time}
                     </span>
                   </div>
 
