@@ -21,7 +21,7 @@ export const TestimonialCard = ({ name, position, company, image, quote }: Testi
 
       {/* Quote Text */}
       <div className="relative z-10 flex-grow mb-12">
-        <p className="text-gray-300 text-[17px] leading-relaxed font-medium group-hover:text-gray-100 transition-colors duration-300 italic">
+        <p className="text-zinc-300 text-[17px] leading-relaxed font-medium group-hover:text-zinc-100 transition-colors duration-300 italic">
           "{quote}"
         </p>
       </div>
@@ -40,8 +40,8 @@ export const TestimonialCard = ({ name, position, company, image, quote }: Testi
           <h4 className="text-white font-bold text-base group-hover:text-emerald-300 transition-colors duration-300 tracking-wide">
             {name}
           </h4>
-          <span className="text-gray-400 text-xs tracking-wider uppercase mt-0.5">
-            {position}, <span className="text-gray-300 font-semibold">{company}</span>
+          <span className="text-zinc-400 text-xs tracking-wider uppercase mt-0.5">
+            {position}, <span className="text-zinc-300 font-semibold">{company}</span>
           </span>
         </div>
       </div>

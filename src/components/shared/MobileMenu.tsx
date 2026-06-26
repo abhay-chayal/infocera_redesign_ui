@@ -77,7 +77,7 @@ export const MobileMenu = ({ items, isOpen, onClose }: MobileMenuProps) => {
       aria-hidden={!isOpen}
       inert={!isOpen ? true : undefined}
       className={cn(
-        "fixed inset-0 top-[72px] bg-[#0B1120] z-40 transition-transform duration-300 ease-in-out xl:hidden overflow-y-auto",
+        "fixed inset-0 top-[72px] bg-[black] z-40 transition-transform duration-300 ease-in-out xl:hidden overflow-y-auto",
         isOpen ? "translate-x-0" : "translate-x-full"
       )}
     >
@@ -89,14 +89,14 @@ export const MobileMenu = ({ items, isOpen, onClose }: MobileMenuProps) => {
                 <div className="flex items-center justify-between w-full">
                   <Link
                     to={item.path}
-                    className="font-medium text-lg text-white hover:text-purple-400 transition-colors"
+                    className="font-medium text-lg text-white hover:text-cyan-400 transition-colors"
                     onClick={onClose}
                   >
                     {item.label}
                   </Link>
                   <button
                     onClick={() => toggleDropdown(item.label)}
-                    className="p-2 text-white hover:text-purple-300 transition-colors focus:outline-none"
+                    className="p-2 text-white hover:text-blue-300 transition-colors focus:outline-none"
                     aria-expanded={openDropdowns[item.label]}
                     aria-label={`Toggle ${item.label} menu`}
                   >
@@ -117,7 +117,7 @@ export const MobileMenu = ({ items, isOpen, onClose }: MobileMenuProps) => {
                     <div className="flex flex-col space-y-6 pl-4 border-l-2 border-white/10">
                       {item.megaMenuColumns?.map((col) => (
                         <div key={col.title}>
-                          <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">
+                          <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-2">
                             {col.title}
                           </h4>
                           <div className="flex flex-col space-y-3">
@@ -125,7 +125,7 @@ export const MobileMenu = ({ items, isOpen, onClose }: MobileMenuProps) => {
                               <Link
                                 key={child.label}
                                 to={child.path}
-                                className="text-[15px] text-gray-300 hover:text-white transition-colors"
+                                className="text-[15px] text-zinc-300 hover:text-white transition-colors"
                                 onClick={onClose}
                               >
                                 {child.label}
@@ -141,7 +141,7 @@ export const MobileMenu = ({ items, isOpen, onClose }: MobileMenuProps) => {
                         <Link
                           key={child.label}
                           to={child.path}
-                          className="text-[15px] text-gray-300 hover:text-white transition-colors"
+                          className="text-[15px] text-zinc-300 hover:text-white transition-colors"
                           onClick={onClose}
                         >
                           {child.label}
@@ -154,7 +154,7 @@ export const MobileMenu = ({ items, isOpen, onClose }: MobileMenuProps) => {
             ) : (
               <Link
                 to={item.path}
-                className="block font-medium text-lg text-white hover:text-purple-400 transition-colors"
+                className="block font-medium text-lg text-white hover:text-cyan-400 transition-colors"
                 onClick={onClose}
               >
                 {item.label}
@@ -169,7 +169,7 @@ export const MobileMenu = ({ items, isOpen, onClose }: MobileMenuProps) => {
             onClick={onClose}
             variant="secondary"
             size="lg"
-            className="w-full bg-[#7C3AED] hover:bg-[#6D28D9] shadow-lg hover:shadow-purple-500/25"
+            className="w-full bg-[#7C3AED] hover:bg-[#6D28D9] shadow-lg hover:shadow-blue-500/25"
           >
             My Account
           </Button>

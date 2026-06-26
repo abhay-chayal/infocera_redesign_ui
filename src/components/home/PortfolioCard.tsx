@@ -16,12 +16,12 @@ export const PortfolioCard = ({ title, industry, summary, image, href }: Portfol
       <Card variant="interactive" themeColor="fuchsia" className="flex flex-col h-full p-0">
       
       {/* Background Hover Glow */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1e293b]/10 to-[#1e293b]/40 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#18181b]/10 to-[#18181b]/40 pointer-events-none" />
       <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-gradient-to-tl from-fuchsia-500/10 to-transparent blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
       {/* Image Container */}
       <div className="relative w-full h-56 md:h-64 overflow-hidden border-b border-white/5">
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-transparent to-transparent z-10 opacity-80 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[black] via-transparent to-transparent z-10 opacity-80 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none" />
         <img 
           src={image} 
           alt={title} 
@@ -42,7 +42,7 @@ export const PortfolioCard = ({ title, industry, summary, image, href }: Portfol
         <h3 className="text-2xl font-bold text-white mb-3 py-1 leading-snug group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-fuchsia-200 transition-all duration-300">
           {title}
         </h3>
-        <p className="text-gray-400 text-sm leading-relaxed mb-8 flex-grow group-hover:text-gray-300 transition-colors duration-300">
+        <p className="text-zinc-400 text-sm leading-relaxed mb-8 flex-grow group-hover:text-zinc-300 transition-colors duration-300">
           {summary}
         </p>
         

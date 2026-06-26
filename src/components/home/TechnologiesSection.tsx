@@ -4,21 +4,21 @@ import { SectionHeader } from '../shared/SectionHeader';
 
 export const TechnologiesSection = () => {
   return (
-    <section className="relative py-24 lg:py-32 bg-[#0B1120] border-t border-white/5 overflow-hidden">
+    <section className="relative py-24 lg:py-32 bg-[black] border-t border-white/5 overflow-hidden">
       {/* Ambient background glows */}
-      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-indigo-600/5 blur-[120px] rounded-full pointer-events-none -translate-y-1/2 mix-blend-screen" />
-      <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-purple-600/5 blur-[100px] rounded-full pointer-events-none mix-blend-screen" />
+      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-cyan-600/5 blur-[120px] rounded-full pointer-events-none -translate-y-1/2 mix-blend-screen" />
+      <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-blue-600/5 blur-[100px] rounded-full pointer-events-none mix-blend-screen" />
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         
         {/* Header */}
         <SectionHeader
           eyebrow="Core Technologies"
-          eyebrowColor="text-indigo-400"
+          eyebrowColor="text-cyan-400"
           title={
             <>
               Powered by modern, <br className="hidden md:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">
                 enterprise-grade stacks.
               </span>
             </>

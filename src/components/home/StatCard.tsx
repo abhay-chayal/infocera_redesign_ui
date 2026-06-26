@@ -49,24 +49,24 @@ export const StatCard = ({ value, label, icon: Icon, suffix }: StatCardProps) =>
   return (
     <Card variant="standard" themeColor="purple" className="group p-8 flex flex-col items-center justify-center h-full">
       {/* Decorative gradient orb on hover */}
-      <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-purple-500/20 to-indigo-500/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-cyan-500/20 to-cyan-500/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-tr from-fuchsia-500/10 to-transparent blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
       
       <div className="relative z-10 flex flex-col items-center text-center">
-        <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 mb-6 group-hover:bg-purple-500/20 group-hover:text-purple-400 group-hover:border-purple-500/30 transition-all duration-300 text-gray-400 shadow-inner">
+        <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 mb-6 group-hover:bg-blue-500/20 group-hover:text-cyan-400 group-hover:border-blue-500/30 transition-all duration-300 text-zinc-400 shadow-inner">
           <Icon className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
         </div>
         
-        <h3 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 mb-3 tracking-tight">
+        <h3 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-400 mb-3 tracking-tight">
           <AnimatedCounter value={value} />
         </h3>
         
-        <p className="text-sm font-semibold text-gray-300 uppercase tracking-widest mb-1">
+        <p className="text-sm font-semibold text-zinc-300 uppercase tracking-widest mb-1">
           {label}
         </p>
         
         {suffix && (
-          <p className="text-xs text-gray-400 font-medium">
+          <p className="text-xs text-zinc-400 font-medium">
             {suffix}
           </p>
         )}

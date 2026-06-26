@@ -20,7 +20,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ variant = 'standard', themeColor = 'white', className, children, ...props }, ref) => {
     
     // Base styles applied to all cards
-    const baseStyles = "relative overflow-hidden border border-white/5 bg-[#1e293b]/20 backdrop-blur-xl transition-all duration-500";
+    const baseStyles = "relative overflow-hidden border border-white/5 bg-[#18181b]/20 backdrop-blur-xl transition-all duration-500";
     
     // Variant specific styles
     const variants = {
@@ -39,9 +39,9 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       
       switch (themeColor) {
         case 'purple':
-          return `lg:hover:border-purple-500/40 lg:hover:${shadowSpread}rgba(168,85,247,0.2)]`;
+          return `lg:hover:border-blue-500/40 lg:hover:${shadowSpread}rgba(168,85,247,0.2)]`;
         case 'indigo':
-          return `lg:hover:border-indigo-500/40 lg:hover:${shadowSpread}rgba(99,102,241,0.2)]`;
+          return `lg:hover:border-cyan-500/40 lg:hover:${shadowSpread}rgba(99,102,241,0.2)]`;
         case 'fuchsia':
           return `lg:hover:border-fuchsia-500/40 lg:hover:${shadowSpread}rgba(217,70,239,0.2)]`;
         case 'emerald':

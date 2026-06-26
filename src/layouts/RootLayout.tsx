@@ -6,7 +6,7 @@ import { ScrollToTop } from '../components/shared/ScrollToTop';
 
 export const RootLayout = () => {
   return (
-    <div className="min-h-screen flex flex-col font-sans bg-[#0f172a] text-white">
+    <div className="min-h-screen flex flex-col font-sans bg-[black] text-white">
       <ScrollToTop />
       <Navbar />
       <main className="flex-grow">

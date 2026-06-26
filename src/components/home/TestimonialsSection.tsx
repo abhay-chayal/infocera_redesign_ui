@@ -5,7 +5,7 @@ import { Sparkles } from 'lucide-react';
 
 export const TestimonialsSection = () => {
   return (
-    <section className="relative py-24 lg:py-32 bg-[#0B1120] border-t border-white/5 overflow-hidden">
+    <section className="relative py-24 lg:py-32 bg-[black] border-t border-white/5 overflow-hidden">
       
       {/* Ambient Glows */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-emerald-600/5 blur-[120px] rounded-full pointer-events-none mix-blend-screen" />
