@@ -6,7 +6,7 @@ interface SectionHeaderProps {
   title: string | React.ReactNode;
   subtitle?: string | React.ReactNode;
   eyebrow?: string | React.ReactNode;
-  eyebrowColor?: string; // Tailwind text color class, e.g., 'text-cyan-400'
+  eyebrowColor?: string; // Tailwind text color class, e.g., 'text-indigo-400'
   align?: 'left' | 'center';
   className?: string; // Optional wrapper class
 }
@@ -50,7 +50,7 @@ export const SectionHeader = ({
       {subtitle && (
         <motion.p 
           variants={fadeInUp}
-          className={`text-lg md:text-xl text-zinc-400 leading-relaxed ${subtitleMaxWidth}`}
+          className={`text-lg md:text-xl text-gray-400 leading-relaxed ${subtitleMaxWidth}`}
         >
           {subtitle}
         </motion.p>

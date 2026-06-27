@@ -21,7 +21,7 @@ export const HeroSection = () => {
           {/* Fallback overlay if video doesn't load immediately */}
         </video>
         {/* Gradient overlays to ensure text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[black] mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#0f172a] mix-blend-multiply" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/40 to-black/80" />
       </div>
 
@@ -43,11 +43,11 @@ export const HeroSection = () => {
               size="sm"
               className="group rounded-full mb-8 bg-white/5 border-white/10 hover:bg-white/10 backdrop-blur-md"
             >
-              <Sparkles className="w-4 h-4 text-zinc-300 group-hover:text-white transition-colors" />
-              <span className="text-xs md:text-sm font-medium text-zinc-300 group-hover:text-white transition-colors tracking-wide">
+              <Sparkles className="w-4 h-4 text-gray-300 group-hover:text-white transition-colors" />
+              <span className="text-xs md:text-sm font-medium text-gray-300 group-hover:text-white transition-colors tracking-wide">
                 {heroData.badge.text}
               </span>
-              <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:translate-x-0.5 group-hover:text-white transition-all" />
+              <ArrowRight className="w-4 h-4 text-gray-400 group-hover:translate-x-0.5 group-hover:text-white transition-all" />
             </Button>
           </motion.div>
 
@@ -57,7 +57,7 @@ export const HeroSection = () => {
             className="text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-6"
           >
             {heroData.headline.prefix} <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 to-zinc-400 font-semibold">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-400 font-semibold">
               {heroData.headline.highlight}
             </span>
           </motion.h1>
@@ -65,7 +65,7 @@ export const HeroSection = () => {
           {/* Description */}
           <motion.p 
             variants={fadeInUp}
-            className="text-base md:text-xl text-zinc-200 mb-10 max-w-2xl leading-relaxed font-light opacity-90"
+            className="text-base md:text-xl text-gray-200 mb-10 max-w-2xl leading-relaxed font-light opacity-90"
           >
             {heroData.description}
           </motion.p>
@@ -79,7 +79,7 @@ export const HeroSection = () => {
               href={heroData.primaryCta.href}
               variant="primary"
               size="lg"
-              className="w-full sm:w-auto bg-white text-black hover:bg-zinc-200 border-0 rounded-full px-8 py-3.5 text-base font-semibold"
+              className="w-full sm:w-auto bg-white text-black hover:bg-gray-200 border-0 rounded-full px-8 py-3.5 text-base font-semibold"
             >
               {heroData.primaryCta.label}
               <ArrowRight className="w-4 h-4" />

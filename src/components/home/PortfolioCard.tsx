@@ -42,7 +42,7 @@ export const PortfolioCard = ({ title, industry, summary, image, href }: Portfol
         <h3 className="text-2xl font-bold text-white mb-3 py-1 leading-snug group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-fuchsia-200 transition-all duration-300">
           {title}
         </h3>
-        <p className="text-zinc-400 text-sm leading-relaxed mb-8 flex-grow group-hover:text-zinc-300 transition-colors duration-300">
+        <p className="text-gray-400 text-sm leading-relaxed mb-8 flex-grow group-hover:text-gray-300 transition-colors duration-300">
           {summary}
         </p>
         

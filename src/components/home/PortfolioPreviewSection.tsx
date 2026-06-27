@@ -8,11 +8,11 @@ import { staggerContainer, fadeInUp } from '../../utils/animations';
 
 export const PortfolioPreviewSection = () => {
   return (
-    <section className="relative py-24 lg:py-32 bg-[black] border-t border-white/5 overflow-hidden">
+    <section className="relative py-24 lg:py-32 bg-[#0B1120] border-t border-white/5 overflow-hidden">
       
       {/* Background Ambient Glows */}
       <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-fuchsia-600/5 blur-[120px] rounded-full pointer-events-none mix-blend-screen" />
-      <div className="absolute top-1/4 left-0 w-[400px] h-[400px] bg-blue-600/5 blur-[100px] rounded-full pointer-events-none mix-blend-screen" />
+      <div className="absolute top-1/4 left-0 w-[400px] h-[400px] bg-purple-600/5 blur-[100px] rounded-full pointer-events-none mix-blend-screen" />
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         
@@ -25,7 +25,7 @@ export const PortfolioPreviewSection = () => {
               title={
                 <>
                   Proven impact across{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-blue-400">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-purple-400">
                     global industries.
                   </span>
                 </>

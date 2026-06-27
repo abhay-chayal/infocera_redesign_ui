@@ -5,11 +5,11 @@ import { Button } from '../shared/Button';
 
 export const CTASection = () => {
   return (
-    <section className="relative py-24 lg:py-32 bg-[black] border-t border-white/5 overflow-hidden">
+    <section className="relative py-24 lg:py-32 bg-[#0B1120] border-t border-white/5 overflow-hidden">
       
       {/* Massive Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] opacity-20 pointer-events-none mix-blend-screen">
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-fuchsia-500 blur-[150px] rounded-full" />
+        <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 blur-[150px] rounded-full" />
       </div>
 
       {/* Grid Pattern Overlay */}
@@ -22,11 +22,11 @@ export const CTASection = () => {
           <div className="relative rounded-3xl bg-[#18181b]/30 backdrop-blur-3xl border border-white/10 p-10 md:p-16 lg:p-24 text-center overflow-hidden shadow-[0_0_100px_rgba(139,92,246,0.15)]">
             
             {/* Internal Accent Lines */}
-            <div className="absolute top-0 left-1/4 w-1/2 h-px bg-gradient-to-r from-transparent via-blue-400/70 to-transparent" />
-            <div className="absolute bottom-0 left-1/3 w-1/3 h-px bg-gradient-to-r from-transparent via-cyan-400/70 to-transparent" />
+            <div className="absolute top-0 left-1/4 w-1/2 h-px bg-gradient-to-r from-transparent via-purple-400/70 to-transparent" />
+            <div className="absolute bottom-0 left-1/3 w-1/3 h-px bg-gradient-to-r from-transparent via-indigo-400/70 to-transparent" />
             
             <div className="absolute -top-32 -right-32 w-64 h-64 bg-fuchsia-500/20 blur-[80px] rounded-full pointer-events-none" />
-            <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-cyan-500/20 blur-[80px] rounded-full pointer-events-none" />
+            <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-indigo-500/20 blur-[80px] rounded-full pointer-events-none" />
 
             {/* Content */}
             <div className="relative z-10">

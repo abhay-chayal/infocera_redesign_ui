@@ -114,7 +114,7 @@ export const Navbar = () => {
                     to={item.path}
                     className={cn(
                       "flex items-center text-[15px] font-medium transition-colors outline-none",
-                      activeDropdown === item.label ? "text-cyan-400" : "text-white hover:text-blue-300"
+                      activeDropdown === item.label ? "text-indigo-400" : "text-white hover:text-purple-300"
                     )}
                     aria-expanded={activeDropdown === item.label}
                     aria-haspopup="true"
@@ -135,7 +135,7 @@ export const Navbar = () => {
                     <div className="grid grid-cols-3 gap-x-8 gap-y-10">
                       {item.megaMenuColumns?.map((col) => (
                         <div key={col.title}>
-                          <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-4 border-b border-white/10 pb-2">
+                          <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 border-b border-white/10 pb-2">
                             {col.title}
                           </h3>
                           <ul className="space-y-2.5">
@@ -143,7 +143,7 @@ export const Navbar = () => {
                               <li key={child.label}>
                                 <Link
                                   to={child.path}
-                                  className="text-sm text-zinc-300 hover:text-white hover:underline decoration-purple-500 underline-offset-4 transition-all block"
+                                  className="text-sm text-gray-300 hover:text-white hover:underline decoration-purple-500 underline-offset-4 transition-all block"
                                   role="menuitem"
                                   onClick={() => setActiveDropdown(null)}
                                 >
@@ -163,7 +163,7 @@ export const Navbar = () => {
                     to={item.path}
                     className={cn(
                       "flex items-center text-[15px] font-medium transition-colors outline-none",
-                      activeDropdown === item.label ? "text-cyan-400" : "text-white hover:text-blue-300"
+                      activeDropdown === item.label ? "text-indigo-400" : "text-white hover:text-purple-300"
                     )}
                     aria-expanded={activeDropdown === item.label}
                     aria-haspopup="true"
@@ -185,7 +185,7 @@ export const Navbar = () => {
                       <Link
                         key={child.label}
                         to={child.path}
-                        className="block px-6 py-2.5 text-sm text-zinc-300 hover:bg-white/5 hover:text-white transition-colors"
+                        className="block px-6 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors"
                         role="menuitem"
                         onClick={() => setActiveDropdown(null)}
                       >
@@ -198,8 +198,8 @@ export const Navbar = () => {
                 <Link
                   to={item.path}
                   className={cn(
-                    "text-[15px] font-medium transition-colors hover:text-cyan-400",
-                    location.pathname === item.path ? "text-white" : "text-zinc-200"
+                    "text-[15px] font-medium transition-colors hover:text-indigo-400",
+                    location.pathname === item.path ? "text-white" : "text-gray-200"
                   )}
                 >
                   {item.label}
@@ -219,20 +219,20 @@ export const Navbar = () => {
           >
             {isAuthenticated ? (userRole === 'admin' ? 'Admin Panel' : 'Dashboard') : 'My Account'}
           </Button>
-          <Button variant="ghost" size="icon" className="text-white hover:text-cyan-400 hover:bg-transparent" aria-label="Search">
+          <Button variant="ghost" size="icon" className="text-white hover:text-indigo-400 hover:bg-transparent" aria-label="Search">
             <Search className="w-5 h-5" />
           </Button>
         </div>
 
         {/* Mobile Hamburger Toggle */}
         <div className="xl:hidden flex items-center space-x-4">
-          <Button variant="ghost" size="icon" className="text-white hover:text-cyan-400 hover:bg-transparent" aria-label="Search">
+          <Button variant="ghost" size="icon" className="text-white hover:text-indigo-400 hover:bg-transparent" aria-label="Search">
             <Search className="w-5 h-5" />
           </Button>
           <Button
             variant="ghost"
             size="icon"
-            className="relative z-50 text-white hover:text-cyan-400 hover:bg-transparent"
+            className="relative z-50 text-white hover:text-indigo-400 hover:bg-transparent"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-expanded={isMobileMenuOpen}
             aria-label="Toggle navigation menu"
