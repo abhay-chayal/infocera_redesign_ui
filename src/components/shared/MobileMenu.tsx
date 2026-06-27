@@ -89,14 +89,14 @@ export const MobileMenu = ({ items, isOpen, onClose }: MobileMenuProps) => {
                 <div className="flex items-center justify-between w-full">
                   <Link
                     to={item.path}
-                    className="font-medium text-lg text-white hover:text-indigo-400 transition-colors"
+                    className="font-bold text-lg text-white hover:text-zinc-300 transition-colors tracking-wide"
                     onClick={onClose}
                   >
                     {item.label}
                   </Link>
                   <button
                     onClick={() => toggleDropdown(item.label)}
-                    className="p-2 text-white hover:text-purple-300 transition-colors focus:outline-none"
+                    className="p-2 text-white hover:text-zinc-300 transition-colors focus:outline-none"
                     aria-expanded={openDropdowns[item.label]}
                     aria-label={`Toggle ${item.label} menu`}
                   >
@@ -117,7 +117,7 @@ export const MobileMenu = ({ items, isOpen, onClose }: MobileMenuProps) => {
                     <div className="flex flex-col space-y-6 pl-4 border-l-2 border-white/10">
                       {item.megaMenuColumns?.map((col) => (
                         <div key={col.title}>
-                          <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">
+                          <h4 className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-2">
                             {col.title}
                           </h4>
                           <div className="flex flex-col space-y-3">
@@ -154,7 +154,7 @@ export const MobileMenu = ({ items, isOpen, onClose }: MobileMenuProps) => {
             ) : (
               <Link
                 to={item.path}
-                className="block font-medium text-lg text-white hover:text-indigo-400 transition-colors"
+                className="block font-bold text-lg text-white hover:text-zinc-300 transition-colors tracking-wide"
                 onClick={onClose}
               >
                 {item.label}
@@ -169,7 +169,7 @@ export const MobileMenu = ({ items, isOpen, onClose }: MobileMenuProps) => {
             onClick={onClose}
             variant="secondary"
             size="lg"
-            className="w-full bg-[#7C3AED] hover:bg-[#6D28D9] shadow-lg hover:shadow-purple-500/25"
+            className="w-full bg-white text-black hover:bg-zinc-200 border-0 shadow-none font-bold rounded-full py-6"
           >
             My Account
           </Button>

@@ -15,21 +15,21 @@ export const HeroSection = () => {
           loop 
           muted 
           playsInline 
-          className="w-full h-full object-cover opacity-60"
+          className="w-full h-full object-cover opacity-80"
         >
           <source src="/assets/project16.mp4" type="video/mp4" />
           {/* Fallback overlay if video doesn't load immediately */}
         </video>
-        {/* Gradient overlays to ensure text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#0f172a] mix-blend-multiply" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/40 to-black/80" />
+        {/* Simple Vignette to ensure text readability without gradients */}
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/20 to-black/80" />
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10 flex flex-col items-center justify-center text-center">
         
         {/* Clean, Centered Content */}
         <motion.div 
-          className="max-w-3xl mx-auto flex flex-col items-center"
+          className="max-w-4xl mx-auto flex flex-col items-center"
           variants={staggerContainer}
           initial="visible"
           animate="visible"
@@ -41,23 +41,23 @@ export const HeroSection = () => {
               href={heroData.badge.link}
               variant="outline"
               size="sm"
-              className="group rounded-full mb-8 bg-white/5 border-white/10 hover:bg-white/10 backdrop-blur-md"
+              className="group rounded-full mb-10 bg-white/5 border-white/10 hover:bg-white/10 backdrop-blur-xl"
             >
-              <Sparkles className="w-4 h-4 text-gray-300 group-hover:text-white transition-colors" />
-              <span className="text-xs md:text-sm font-medium text-gray-300 group-hover:text-white transition-colors tracking-wide">
+              <Sparkles className="w-4 h-4 text-zinc-400 group-hover:text-white transition-colors" />
+              <span className="text-xs md:text-sm font-semibold text-zinc-300 group-hover:text-white transition-colors tracking-widest uppercase">
                 {heroData.badge.text}
               </span>
-              <ArrowRight className="w-4 h-4 text-gray-400 group-hover:translate-x-0.5 group-hover:text-white transition-all" />
+              <ArrowRight className="w-4 h-4 text-zinc-500 group-hover:translate-x-0.5 group-hover:text-white transition-all" />
             </Button>
           </motion.div>
 
           {/* Minimalist Premium Headline */}
           <motion.h1 
             variants={fadeInUp}
-            className="text-4xl sm:text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-6"
+            className="text-5xl sm:text-6xl md:text-8xl font-bold text-white tracking-tighter leading-[1.05] mb-8"
           >
             {heroData.headline.prefix} <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-400 font-semibold">
+            <span className="text-white">
               {heroData.headline.highlight}
             </span>
           </motion.h1>
@@ -65,7 +65,7 @@ export const HeroSection = () => {
           {/* Description */}
           <motion.p 
             variants={fadeInUp}
-            className="text-base md:text-xl text-gray-200 mb-10 max-w-2xl leading-relaxed font-light opacity-90"
+            className="text-lg md:text-2xl text-zinc-400 mb-12 max-w-3xl leading-relaxed font-medium"
           >
             {heroData.description}
           </motion.p>
@@ -73,22 +73,22 @@ export const HeroSection = () => {
           {/* Refined CTAs */}
           <motion.div 
             variants={fadeInUp}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
+            className="flex flex-col sm:flex-row items-center justify-center gap-6 w-full sm:w-auto"
           >
             <Button 
               href={heroData.primaryCta.href}
               variant="primary"
               size="lg"
-              className="w-full sm:w-auto bg-white text-black hover:bg-gray-200 border-0 rounded-full px-8 py-3.5 text-base font-semibold"
+              className="w-full sm:w-auto bg-white text-black hover:bg-zinc-200 border-0 rounded-full px-10 py-4 text-base font-bold transition-transform hover:scale-105 duration-300 shadow-[0_0_40px_rgba(255,255,255,0.2)]"
             >
               {heroData.primaryCta.label}
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
             <Button 
               href={heroData.secondaryCta.href}
               variant="outline"
               size="lg"
-              className="w-full sm:w-auto border-white/20 text-white hover:bg-white/10 rounded-full px-8 py-3.5 text-base backdrop-blur-md"
+              className="w-full sm:w-auto border-white/20 text-white hover:bg-white/10 rounded-full px-10 py-4 text-base font-bold backdrop-blur-xl transition-all hover:border-white/40"
             >
               {heroData.secondaryCta.label}
             </Button>

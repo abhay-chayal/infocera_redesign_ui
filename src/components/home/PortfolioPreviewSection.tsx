@@ -8,12 +8,7 @@ import { staggerContainer, fadeInUp } from '../../utils/animations';
 
 export const PortfolioPreviewSection = () => {
   return (
-    <section className="relative py-24 lg:py-32 bg-[#0B1120] border-t border-white/5 overflow-hidden">
-      
-      {/* Background Ambient Glows */}
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-fuchsia-600/5 blur-[120px] rounded-full pointer-events-none mix-blend-screen" />
-      <div className="absolute top-1/4 left-0 w-[400px] h-[400px] bg-purple-600/5 blur-[100px] rounded-full pointer-events-none mix-blend-screen" />
-
+    <section className="relative py-24 lg:py-32 bg-black border-t border-white/5 overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         
         {/* Header */}
@@ -21,11 +16,11 @@ export const PortfolioPreviewSection = () => {
           <div className="flex-1 max-w-3xl">
             <SectionHeader
               eyebrow="Our Work"
-              eyebrowColor="text-fuchsia-400"
+              eyebrowColor="text-zinc-500"
               title={
                 <>
                   Proven impact across{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-purple-400">
+                  <span className="text-white">
                     global industries.
                   </span>
                 </>
@@ -38,7 +33,7 @@ export const PortfolioPreviewSection = () => {
             href="/portfolio"
             variant="outline"
             size="md"
-            className="group whitespace-nowrap rounded-lg"
+            className="group whitespace-nowrap rounded-full bg-white text-black hover:bg-zinc-200 border-0"
           >
             View Full Portfolio
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

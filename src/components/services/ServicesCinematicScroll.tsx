@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { servicesPageData } from '../../data/servicesPageData';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';

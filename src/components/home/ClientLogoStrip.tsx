@@ -9,26 +9,24 @@ export const ClientLogoStrip = () => {
   ];
 
   return (
-    <section className="py-24 bg-[#0B1120] border-b border-white/5 relative overflow-hidden">
-      {/* Background Ambience */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-900/10 via-[black] to-[#0f172a] pointer-events-none" />
+    <section className="py-32 bg-black border-b border-white/5 relative overflow-hidden">
       
       <div className="container mx-auto px-4 relative z-10">
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400 uppercase tracking-[0.3em] mb-16"
+          className="text-center text-[11px] font-bold text-zinc-500 uppercase tracking-[0.3em] mb-20"
         >
           {logoData.headline}
         </motion.p>
         
         {/* Floating Constellation Grid */}
-        <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10 max-w-5xl mx-auto">
+        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 max-w-5xl mx-auto">
           {allLogos.map((logo, idx) => (
             <motion.div 
               key={logo.id}
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ 
@@ -43,10 +41,12 @@ export const ClientLogoStrip = () => {
                 className="animate-float" 
                 style={{ animationDelay: `${(idx % 5) * 0.5}s` }}
               >
-                <div className="px-6 py-4 md:px-8 md:py-5 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-md hover:bg-white/[0.05] hover:border-white/10 transition-all duration-500 flex items-center justify-center cursor-default shadow-lg shadow-black/20">
-                  <span className="text-lg md:text-xl font-bold font-['Exo',sans-serif] tracking-wider text-gray-400 group-hover:text-white transition-colors duration-500">
-                    {logo.name}
-                  </span>
+                <div className="px-6 py-4 flex items-center justify-center cursor-default opacity-40 hover:opacity-100 transition-all duration-500 transform hover:scale-125 hover:-translate-y-2 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                  <img 
+                    src={logo.logoUrl} 
+                    alt={logo.name} 
+                    className={`h-7 md:h-9 w-auto object-contain select-none pointer-events-none ${logo.needsInvert ? 'brightness-0 invert' : ''}`} 
+                  />
                 </div>
               </div>
             </motion.div>
@@ -57,10 +57,10 @@ export const ClientLogoStrip = () => {
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
+          50% { transform: translateY(-8px); }
         }
         .animate-float {
-          animation: float 4s ease-in-out infinite;
+          animation: float 6s ease-in-out infinite;
         }
       `}} />
     </section>

@@ -15,7 +15,7 @@ export const SectionHeader = ({
   title, 
   subtitle, 
   eyebrow, 
-  eyebrowColor = 'text-blue-400', 
+  eyebrowColor = 'text-zinc-500', 
   align = 'center',
   className = ''
 }: SectionHeaderProps) => {
@@ -25,7 +25,7 @@ export const SectionHeader = ({
 
   return (
     <motion.div 
-      className={`flex flex-col ${alignmentClass} ${className} mb-12 lg:mb-16`}
+      className={`flex flex-col ${alignmentClass} ${className} mb-16 lg:mb-24`}
       variants={staggerContainer}
       initial="hidden"
       whileInView="visible"
@@ -34,7 +34,7 @@ export const SectionHeader = ({
       {eyebrow && (
         <motion.span 
           variants={fadeInUp}
-          className={`${eyebrowColor} text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2`}
+          className={`${eyebrowColor} text-[11px] font-bold uppercase tracking-[0.25em] mb-4 flex items-center gap-2`}
         >
           {eyebrow}
         </motion.span>
@@ -42,7 +42,7 @@ export const SectionHeader = ({
       
       <motion.h2 
         variants={fadeInUp}
-        className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-6 leading-[1.2]"
+        className="text-4xl md:text-6xl font-bold text-white tracking-tighter mb-6 leading-[1.05]"
       >
         {title}
       </motion.h2>
@@ -50,7 +50,7 @@ export const SectionHeader = ({
       {subtitle && (
         <motion.p 
           variants={fadeInUp}
-          className={`text-lg md:text-xl text-gray-400 leading-relaxed ${subtitleMaxWidth}`}
+          className={`text-lg md:text-xl text-zinc-400 leading-relaxed font-medium ${subtitleMaxWidth}`}
         >
           {subtitle}
         </motion.p>

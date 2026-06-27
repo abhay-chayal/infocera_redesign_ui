@@ -1,5 +1,4 @@
 import { type ElementType, useEffect, useRef } from 'react';
-import { Card } from '../shared/Card';
 import { motion, useMotionValue, useTransform, animate, useInView } from 'framer-motion';
 
 const AnimatedCounter = ({ value }: { value: string }) => {
@@ -47,30 +46,26 @@ interface StatCardProps {
 
 export const StatCard = ({ value, label, icon: Icon, suffix }: StatCardProps) => {
   return (
-    <Card variant="standard" themeColor="purple" className="group p-8 flex flex-col items-center justify-center h-full">
-      {/* Decorative gradient orb on hover */}
-      <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-indigo-500/20 to-indigo-500/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-      <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-tr from-fuchsia-500/10 to-transparent blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-      
+    <div className="flex flex-col items-center justify-center h-full text-center">
       <div className="relative z-10 flex flex-col items-center text-center">
-        <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 mb-6 group-hover:bg-purple-500/20 group-hover:text-indigo-400 group-hover:border-purple-500/30 transition-all duration-300 text-gray-400 shadow-inner">
-          <Icon className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
+        <div className="w-12 h-12 flex items-center justify-center mb-6 text-zinc-500">
+          <Icon className="w-8 h-8" strokeWidth={1.5} />
         </div>
         
-        <h3 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 mb-3 tracking-tight">
+        <h3 className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tighter">
           <AnimatedCounter value={value} />
         </h3>
         
-        <p className="text-sm font-semibold text-gray-300 uppercase tracking-widest mb-1">
+        <p className="text-[11px] font-bold text-zinc-400 uppercase tracking-[0.25em] mb-2">
           {label}
         </p>
         
         {suffix && (
-          <p className="text-xs text-gray-400 font-medium">
+          <p className="text-sm text-zinc-500 font-medium">
             {suffix}
           </p>
         )}
       </div>
-    </Card>
+    </div>
   );
 };

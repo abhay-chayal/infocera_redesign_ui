@@ -77,10 +77,10 @@ export const Navbar = () => {
     <>
       <header
         className={cn(
-          "fixed top-0 z-50 w-full transition-all duration-700 border-b",
+          "fixed top-0 z-50 w-full transition-all duration-700",
           scrolled || isMobileMenuOpen
-            ? "bg-[#070b14]/60 backdrop-blur-xl border-white/10 py-3 shadow-2xl"
-            : "bg-[#070b14]/0 border-transparent py-5"
+            ? "bg-[#111111]/70 backdrop-blur-2xl border-b border-white/5 py-4 shadow-2xl"
+            : "bg-transparent border-transparent py-6"
         )}
       >
       <div className="container mx-auto px-4 lg:px-8 flex items-center justify-between">
@@ -88,23 +88,21 @@ export const Navbar = () => {
         {/* Brand Logo */}
         <Link
           to="/"
-          className="flex flex-col items-start py-2 leading-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)] relative z-50 mr-8 hover:opacity-90 transition-opacity"
+          className="flex items-center py-2 leading-none relative z-50 mr-8 hover:opacity-80 transition-opacity"
           aria-label="Infocera Home"
         >
-          <span className="font-['Exo','Orbitron',sans-serif] font-[900] text-[28px] tracking-[3px] bg-gradient-to-br from-[#5b21b6] via-[#9333ea] to-[#4f46e5] bg-clip-text text-transparent">
-            INFOCERA
-          </span>
-          <span className="font-sans font-[700] text-[9px] tracking-[4px] text-white mt-[3px] uppercase">
-            Seamless Connections
+          <span className="font-['Exo','Orbitron',sans-serif] text-[28px] tracking-[3px]">
+            <span className="font-[900] text-white">INFO</span>
+            <span className="font-[400] text-cyan-400">CERA</span>
           </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden xl:flex items-center space-x-7" aria-label="Main Navigation">
+        <nav className="hidden xl:flex items-center space-x-8" aria-label="Main Navigation">
           {navigationData.map((item) => (
             <div
               key={item.label}
-              className="relative group px-3 py-2"
+              className="relative group py-2"
               onMouseEnter={() => setActiveDropdown(item.label)}
               onMouseLeave={() => setActiveDropdown(null)}
             >
@@ -113,37 +111,37 @@ export const Navbar = () => {
                   <Link
                     to={item.path}
                     className={cn(
-                      "flex items-center text-[15px] font-medium transition-colors outline-none",
-                      activeDropdown === item.label ? "text-indigo-400" : "text-white hover:text-purple-300"
+                      "flex items-center text-[14px] font-medium transition-colors outline-none tracking-wide",
+                      activeDropdown === item.label ? "text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" : "text-zinc-300 hover:text-white"
                     )}
                     aria-expanded={activeDropdown === item.label}
                     aria-haspopup="true"
                     onClick={() => setActiveDropdown(null)}
                   >
                     {item.label}
-                    <ChevronDown className={cn("w-4 h-4 ml-1 opacity-70 transition-transform duration-200", activeDropdown === item.label && "rotate-180")} />
+                    <ChevronDown className={cn("w-3 h-3 ml-1.5 opacity-50 transition-transform duration-300", activeDropdown === item.label && "rotate-180")} />
                   </Link>
 
                   {/* Mega Menu Dropdown */}
                   <div
                     className={cn(
-                      "absolute top-full -left-[300px] w-[800px] bg-[#111827] border border-white/10 rounded-xl shadow-2xl py-8 px-8 transition-all duration-200 origin-top mt-5",
-                      activeDropdown === item.label ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"
+                      "absolute top-full -left-[300px] w-[800px] bg-[#111111]/95 backdrop-blur-3xl border border-white/10 rounded-2xl shadow-2xl py-8 px-8 transition-all duration-300 origin-top mt-4",
+                      activeDropdown === item.label ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-4"
                     )}
                     role="menu"
                   >
                     <div className="grid grid-cols-3 gap-x-8 gap-y-10">
                       {item.megaMenuColumns?.map((col) => (
                         <div key={col.title}>
-                          <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 border-b border-white/10 pb-2">
+                          <h3 className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.2em] mb-4 border-b border-white/5 pb-3">
                             {col.title}
                           </h3>
-                          <ul className="space-y-2.5">
+                          <ul className="space-y-3">
                             {col.items.map((child) => (
                               <li key={child.label}>
                                 <Link
                                   to={child.path}
-                                  className="text-sm text-gray-300 hover:text-white hover:underline decoration-purple-500 underline-offset-4 transition-all block"
+                                  className="text-[13px] font-medium text-zinc-300 hover:text-white transition-colors block"
                                   role="menuitem"
                                   onClick={() => setActiveDropdown(null)}
                                 >
@@ -162,22 +160,22 @@ export const Navbar = () => {
                   <Link
                     to={item.path}
                     className={cn(
-                      "flex items-center text-[15px] font-medium transition-colors outline-none",
-                      activeDropdown === item.label ? "text-indigo-400" : "text-white hover:text-purple-300"
+                      "flex items-center text-[14px] font-medium transition-colors outline-none tracking-wide",
+                      activeDropdown === item.label ? "text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" : "text-zinc-300 hover:text-white"
                     )}
                     aria-expanded={activeDropdown === item.label}
                     aria-haspopup="true"
                     onClick={() => setActiveDropdown(null)}
                   >
                     {item.label}
-                    <ChevronDown className={cn("w-4 h-4 ml-1 opacity-70 transition-transform duration-200", activeDropdown === item.label && "rotate-180")} />
+                    <ChevronDown className={cn("w-3 h-3 ml-1.5 opacity-50 transition-transform duration-300", activeDropdown === item.label && "rotate-180")} />
                   </Link>
 
                   {/* Standard Dropdown */}
                   <div
                     className={cn(
-                      "absolute top-full left-1/2 -translate-x-1/2 w-64 bg-[#111827] border border-white/10 rounded-xl shadow-2xl py-3 transition-all duration-200 origin-top mt-5",
-                      activeDropdown === item.label ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"
+                      "absolute top-full left-1/2 -translate-x-1/2 w-64 bg-[#111111]/95 backdrop-blur-3xl border border-white/10 rounded-2xl shadow-2xl py-4 transition-all duration-300 origin-top mt-4",
+                      activeDropdown === item.label ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-4"
                     )}
                     role="menu"
                   >
@@ -185,7 +183,7 @@ export const Navbar = () => {
                       <Link
                         key={child.label}
                         to={child.path}
-                        className="block px-6 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors"
+                        className="block px-6 py-2.5 text-[13px] font-medium text-zinc-300 hover:bg-white/10 hover:text-white transition-colors"
                         role="menuitem"
                         onClick={() => setActiveDropdown(null)}
                       >
@@ -198,8 +196,8 @@ export const Navbar = () => {
                 <Link
                   to={item.path}
                   className={cn(
-                    "text-[15px] font-medium transition-colors hover:text-indigo-400",
-                    location.pathname === item.path ? "text-white" : "text-gray-200"
+                    "text-[14px] font-medium transition-colors tracking-wide",
+                    location.pathname === item.path ? "text-white" : "text-zinc-300 hover:text-white"
                   )}
                 >
                   {item.label}
@@ -215,32 +213,26 @@ export const Navbar = () => {
             href={isAuthenticated ? (userRole === 'admin' ? '/admin' : '/dashboard') : '/login'}
             variant="secondary"
             size="sm"
-            className="bg-[#6b21a8] hover:bg-[#581c87] rounded text-[15px] shadow-none hover:shadow-none hover:-translate-y-0"
+            className="bg-white text-black hover:bg-zinc-200 rounded-full px-6 text-[13px] font-bold tracking-wide shadow-none hover:shadow-none transition-transform hover:scale-105"
           >
             {isAuthenticated ? (userRole === 'admin' ? 'Admin Panel' : 'Dashboard') : 'My Account'}
-          </Button>
-          <Button variant="ghost" size="icon" className="text-white hover:text-indigo-400 hover:bg-transparent" aria-label="Search">
-            <Search className="w-5 h-5" />
           </Button>
         </div>
 
         {/* Mobile Hamburger Toggle */}
         <div className="xl:hidden flex items-center space-x-4">
-          <Button variant="ghost" size="icon" className="text-white hover:text-indigo-400 hover:bg-transparent" aria-label="Search">
-            <Search className="w-5 h-5" />
-          </Button>
           <Button
             variant="ghost"
             size="icon"
-            className="relative z-50 text-white hover:text-indigo-400 hover:bg-transparent"
+            className="relative z-50 text-zinc-300 hover:text-white hover:bg-transparent"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-expanded={isMobileMenuOpen}
             aria-label="Toggle navigation menu"
           >
             {isMobileMenuOpen ? (
-              <X className="w-7 h-7" />
+              <X className="w-6 h-6" />
             ) : (
-              <Menu className="w-7 h-7" />
+              <Menu className="w-6 h-6" />
             )}
           </Button>
         </div>

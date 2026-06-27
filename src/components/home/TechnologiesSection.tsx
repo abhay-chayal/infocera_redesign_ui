@@ -4,21 +4,17 @@ import { SectionHeader } from '../shared/SectionHeader';
 
 export const TechnologiesSection = () => {
   return (
-    <section className="relative py-24 lg:py-32 bg-[#0B1120] border-t border-white/5 overflow-hidden">
-      {/* Ambient background glows */}
-      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-indigo-600/5 blur-[120px] rounded-full pointer-events-none -translate-y-1/2 mix-blend-screen" />
-      <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-purple-600/5 blur-[100px] rounded-full pointer-events-none mix-blend-screen" />
-
+    <section className="relative py-24 lg:py-32 bg-black border-t border-white/5 overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         
         {/* Header */}
         <SectionHeader
           eyebrow="Core Technologies"
-          eyebrowColor="text-indigo-400"
+          eyebrowColor="text-zinc-500"
           title={
             <>
               Powered by modern, <br className="hidden md:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">
+              <span className="text-white">
                 enterprise-grade stacks.
               </span>
             </>
@@ -27,19 +23,20 @@ export const TechnologiesSection = () => {
           align="center"
         />
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {/* Custom layout logic to center the bottom row of 2 items nicely */}
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 auto-rows-fr">
           {technologiesData.map((category, idx) => {
-            // If it's the last two items (AI and Databases) on a large screen, make them span differently or just center the grid.
-            // A simple grid handles 5 items gracefully, but we can make the 4th and 5th items span wider if needed.
-            // Using col-span-1 for all maintains the SaaS card aesthetic.
-            const isLastTwoOnLarge = idx >= 3;
+            let spanClass = "col-span-1";
+            if (idx === 0) spanClass = "md:col-span-2 lg:col-span-2"; 
+            if (idx === 1) spanClass = "md:col-span-1 lg:col-span-1"; 
+            if (idx === 2) spanClass = "md:col-span-1 lg:col-span-1"; 
+            if (idx === 3) spanClass = "md:col-span-2 lg:col-span-2";
+            if (idx === 4) spanClass = "md:col-span-2 lg:col-span-3"; 
             
             return (
               <div 
                 key={category.id} 
-                className={`motion-safe:animate-fade-in-up ${isLastTwoOnLarge ? 'lg:col-span-1' : ''}`}
+                className={`motion-safe:animate-fade-in-up h-full ${spanClass}`}
               >
                 <TechnologyCard
                   title={category.title}
