@@ -7,3 +7,26 @@
     @apply bg-[#F8F9FA] text-slate-900 dark:bg-black dark:text-white transition-colors duration-700;
   }
 }
+
+/* Hide global scrollbars for a seamless app-like feel */
+html::-webkit-scrollbar, 
+body::-webkit-scrollbar {
+  display: none;
+}
+
+html, 
+body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+@layer utilities {
+  /* Utility class to hide scrollbar on specific elements */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

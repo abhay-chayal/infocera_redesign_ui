@@ -247,7 +247,12 @@ export const Navbar = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="relative z-50 text-zinc-300 hover:text-white hover:bg-transparent"
+            className={cn(
+              "relative z-50 hover:bg-transparent",
+              isTransparentOnHome 
+                ? "text-white hover:text-white/80" 
+                : "text-slate-900 dark:text-zinc-300 hover:text-slate-700 dark:hover:text-white"
+            )}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-expanded={isMobileMenuOpen}
             aria-label="Toggle navigation menu"
