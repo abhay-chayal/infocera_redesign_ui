@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, Search } from 'lucide-react';
+import { Menu, X, ChevronDown, Search, Sun, Moon } from 'lucide-react';
 import { navigationData } from '../../data/navigation';
 import { MobileMenu } from './MobileMenu';
 import { cn } from '../../utils/cn';
 import { Button } from './Button';
 import { supabase } from '../../lib/supabase';
+import { useTheme } from '../../contexts/ThemeContext';
 
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -14,6 +15,9 @@ export const Navbar = () => {
   const location = useLocation();
   const [userRole, setUserRole] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+
+  const isTransparentOnHome = !scrolled && location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,7 +83,7 @@ export const Navbar = () => {
         className={cn(
           "fixed top-0 z-50 w-full transition-all duration-700",
           scrolled || isMobileMenuOpen
-            ? "bg-[#111111]/70 backdrop-blur-2xl border-b border-white/5 py-4 shadow-2xl"
+            ? "bg-white/80 dark:bg-[#111111]/70 backdrop-blur-2xl border-b border-slate-200 dark:border-white/5 py-4 shadow-xl"
             : "bg-transparent border-transparent py-6"
         )}
       >
@@ -92,8 +96,8 @@ export const Navbar = () => {
           aria-label="Infocera Home"
         >
           <span className="font-['Exo','Orbitron',sans-serif] text-[28px] tracking-[3px]">
-            <span className="font-[900] text-white">INFO</span>
-            <span className="font-[400] text-cyan-400">CERA</span>
+            <span className={cn("font-[900] transition-colors", isTransparentOnHome ? "text-white" : "text-slate-900 dark:text-white")}>INFO</span>
+            <span className={cn("font-[400] transition-colors", isTransparentOnHome ? "text-cyan-400" : "text-[#0ea5e9] dark:text-cyan-400")}>CERA</span>
           </span>
         </Link>
 
@@ -112,7 +116,9 @@ export const Navbar = () => {
                     to={item.path}
                     className={cn(
                       "flex items-center text-[14px] font-medium transition-colors outline-none tracking-wide",
-                      activeDropdown === item.label ? "text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" : "text-zinc-300 hover:text-white"
+                      activeDropdown === item.label 
+                        ? (isTransparentOnHome ? "text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" : "text-slate-900 dark:text-white drop-shadow-md dark:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]") 
+                        : (isTransparentOnHome ? "text-white/80 hover:text-white" : "text-slate-900 dark:text-zinc-300 hover:text-black dark:hover:text-white")
                     )}
                     aria-expanded={activeDropdown === item.label}
                     aria-haspopup="true"
@@ -125,7 +131,7 @@ export const Navbar = () => {
                   {/* Mega Menu Dropdown */}
                   <div
                     className={cn(
-                      "absolute top-full -left-[300px] w-[800px] bg-[#111111]/95 backdrop-blur-3xl border border-white/10 rounded-2xl shadow-2xl py-8 px-8 transition-all duration-300 origin-top mt-4",
+                      "absolute top-full -left-[300px] w-[800px] bg-white/95 dark:bg-[#111111]/95 backdrop-blur-3xl border border-slate-200 dark:border-white/10 rounded-2xl shadow-2xl py-8 px-8 transition-all duration-300 origin-top mt-4",
                       activeDropdown === item.label ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-4"
                     )}
                     role="menu"
@@ -133,7 +139,7 @@ export const Navbar = () => {
                     <div className="grid grid-cols-3 gap-x-8 gap-y-10">
                       {item.megaMenuColumns?.map((col) => (
                         <div key={col.title}>
-                          <h3 className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.2em] mb-4 border-b border-white/5 pb-3">
+                          <h3 className="text-[11px] font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-[0.2em] mb-4 border-b border-slate-200 dark:border-white/5 pb-3">
                             {col.title}
                           </h3>
                           <ul className="space-y-3">
@@ -141,7 +147,7 @@ export const Navbar = () => {
                               <li key={child.label}>
                                 <Link
                                   to={child.path}
-                                  className="text-[13px] font-medium text-zinc-300 hover:text-white transition-colors block"
+                                  className="text-[13px] font-medium text-slate-600 dark:text-zinc-300 hover:text-[#0ea5e9] dark:hover:text-white transition-colors block"
                                   role="menuitem"
                                   onClick={() => setActiveDropdown(null)}
                                 >
@@ -161,7 +167,9 @@ export const Navbar = () => {
                     to={item.path}
                     className={cn(
                       "flex items-center text-[14px] font-medium transition-colors outline-none tracking-wide",
-                      activeDropdown === item.label ? "text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" : "text-zinc-300 hover:text-white"
+                      activeDropdown === item.label 
+                        ? (isTransparentOnHome ? "text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" : "text-slate-900 dark:text-white drop-shadow-md dark:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]") 
+                        : (isTransparentOnHome ? "text-white/80 hover:text-white" : "text-slate-900 dark:text-zinc-300 hover:text-black dark:hover:text-white")
                     )}
                     aria-expanded={activeDropdown === item.label}
                     aria-haspopup="true"
@@ -174,7 +182,7 @@ export const Navbar = () => {
                   {/* Standard Dropdown */}
                   <div
                     className={cn(
-                      "absolute top-full left-1/2 -translate-x-1/2 w-64 bg-[#111111]/95 backdrop-blur-3xl border border-white/10 rounded-2xl shadow-2xl py-4 transition-all duration-300 origin-top mt-4",
+                      "absolute top-full left-1/2 -translate-x-1/2 w-64 bg-white/95 dark:bg-[#111111]/95 backdrop-blur-3xl border border-slate-200 dark:border-white/10 rounded-2xl shadow-2xl py-4 transition-all duration-300 origin-top mt-4",
                       activeDropdown === item.label ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-4"
                     )}
                     role="menu"
@@ -183,7 +191,7 @@ export const Navbar = () => {
                       <Link
                         key={child.label}
                         to={child.path}
-                        className="block px-6 py-2.5 text-[13px] font-medium text-zinc-300 hover:bg-white/10 hover:text-white transition-colors"
+                        className="block px-6 py-2.5 text-[13px] font-medium text-slate-600 dark:text-zinc-300 hover:bg-slate-50 dark:hover:bg-white/10 hover:text-[#0ea5e9] dark:hover:text-white transition-colors"
                         role="menuitem"
                         onClick={() => setActiveDropdown(null)}
                       >
@@ -197,7 +205,9 @@ export const Navbar = () => {
                   to={item.path}
                   className={cn(
                     "text-[14px] font-medium transition-colors tracking-wide",
-                    location.pathname === item.path ? "text-white" : "text-zinc-300 hover:text-white"
+                    location.pathname === item.path 
+                      ? (isTransparentOnHome ? "text-white" : "text-[#0ea5e9] dark:text-white") 
+                      : (isTransparentOnHome ? "text-white/80 hover:text-white" : "text-slate-900 dark:text-zinc-300 hover:text-black dark:hover:text-white")
                   )}
                 >
                   {item.label}
@@ -208,12 +218,25 @@ export const Navbar = () => {
         </nav>
 
         {/* Desktop CTAs */}
-        <div className="hidden xl:flex items-center space-x-6 ml-4">
+        <div className="hidden xl:flex items-center space-x-4 ml-4">
+          <button
+            onClick={toggleTheme}
+            className={cn(
+              "p-2 rounded-full transition-colors",
+              isTransparentOnHome 
+                ? "text-white hover:bg-white/10" 
+                : "text-slate-600 dark:text-zinc-400 hover:bg-slate-100 dark:hover:bg-white/10"
+            )}
+            aria-label="Toggle theme"
+          >
+            {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+          </button>
+          
           <Button
             href={isAuthenticated ? (userRole === 'admin' ? '/admin' : '/dashboard') : '/login'}
             variant="secondary"
             size="sm"
-            className="bg-white text-black hover:bg-zinc-200 rounded-full px-6 text-[13px] font-bold tracking-wide shadow-none hover:shadow-none transition-transform hover:scale-105"
+            className="bg-slate-900 dark:bg-white text-white dark:text-black hover:bg-slate-800 dark:hover:bg-zinc-200 rounded-full px-6 text-[13px] font-bold tracking-wide shadow-none hover:shadow-none transition-transform hover:scale-105"
           >
             {isAuthenticated ? (userRole === 'admin' ? 'Admin Panel' : 'Dashboard') : 'My Account'}
           </Button>

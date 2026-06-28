@@ -8,7 +8,7 @@ import { staggerContainer, fadeInUp } from '../../utils/animations';
 
 export const PortfolioPreviewSection = () => {
   return (
-    <section className="relative py-24 lg:py-32 bg-black border-t border-white/5 overflow-hidden">
+    <section className="relative py-24 lg:py-32 bg-[#F8F9FA] dark:bg-black border-t border-slate-200 dark:border-white/5 overflow-hidden transition-colors duration-700">
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         
         {/* Header */}
@@ -16,11 +16,11 @@ export const PortfolioPreviewSection = () => {
           <div className="flex-1 max-w-3xl">
             <SectionHeader
               eyebrow="Our Work"
-              eyebrowColor="text-zinc-500"
+              eyebrowColor="text-[#0ea5e9] dark:text-zinc-500"
               title={
                 <>
                   Proven impact across{' '}
-                  <span className="text-white">
+                  <span className="text-[#0ea5e9] dark:text-white">
                     global industries.
                   </span>
                 </>
@@ -33,7 +33,7 @@ export const PortfolioPreviewSection = () => {
             href="/portfolio"
             variant="outline"
             size="md"
-            className="group whitespace-nowrap rounded-full bg-white text-black hover:bg-zinc-200 border-0"
+            className="group whitespace-nowrap rounded-full bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200 border-0 transition-colors"
           >
             View Full Portfolio
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

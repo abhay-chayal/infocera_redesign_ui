@@ -9,14 +9,14 @@ export const ClientLogoStrip = () => {
   ];
 
   return (
-    <section className="py-32 bg-black border-b border-white/5 relative overflow-hidden">
+    <section className="py-32 bg-[#F8F9FA] dark:bg-black border-b border-slate-200 dark:border-white/5 relative overflow-hidden transition-colors duration-700">
       
       <div className="container mx-auto px-4 relative z-10">
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center text-[11px] font-bold text-zinc-500 uppercase tracking-[0.3em] mb-20"
+          className="text-center text-[11px] font-bold text-[#0ea5e9] dark:text-zinc-500 uppercase tracking-[0.3em] mb-20 transition-colors duration-700"
         >
           {logoData.headline}
         </motion.p>
@@ -41,11 +41,11 @@ export const ClientLogoStrip = () => {
                 className="animate-float" 
                 style={{ animationDelay: `${(idx % 5) * 0.5}s` }}
               >
-                <div className="px-6 py-4 flex items-center justify-center cursor-default opacity-40 hover:opacity-100 transition-all duration-500 transform hover:scale-125 hover:-translate-y-2 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                <div className="px-6 py-4 flex items-center justify-center cursor-default opacity-40 hover:opacity-100 transition-all duration-500 transform hover:scale-125 hover:-translate-y-2 drop-shadow-[0_0_15px_rgba(0,0,0,0.05)] dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                   <img 
                     src={logo.logoUrl} 
                     alt={logo.name} 
-                    className={`h-7 md:h-9 w-auto object-contain select-none pointer-events-none ${logo.needsInvert ? 'brightness-0 invert' : ''}`} 
+                    className="h-7 md:h-9 w-auto object-contain select-none pointer-events-none transition-all duration-700 brightness-0 dark:invert" 
                   />
                 </div>
               </div>

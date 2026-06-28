@@ -3,7 +3,7 @@ import { statsData } from '../../data/statsData';
 
 export const StatsSection = () => {
   return (
-    <section className="relative py-24 lg:py-32 bg-black border-t border-white/5 overflow-hidden">
+    <section className="relative py-24 lg:py-32 bg-[#F8F9FA] dark:bg-black border-t border-slate-200 dark:border-white/5 overflow-hidden transition-colors duration-700">
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {statsData.map((stat) => (

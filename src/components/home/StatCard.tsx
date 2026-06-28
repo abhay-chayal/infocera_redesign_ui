@@ -48,20 +48,20 @@ export const StatCard = ({ value, label, icon: Icon, suffix }: StatCardProps) =>
   return (
     <div className="flex flex-col items-center justify-center h-full text-center">
       <div className="relative z-10 flex flex-col items-center text-center">
-        <div className="w-12 h-12 flex items-center justify-center mb-6 text-zinc-500">
+        <div className="w-12 h-12 flex items-center justify-center mb-6 text-slate-400 dark:text-zinc-500 transition-colors duration-700">
           <Icon className="w-8 h-8" strokeWidth={1.5} />
         </div>
         
-        <h3 className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tighter">
+        <h3 className="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white mb-4 tracking-tighter transition-colors duration-700">
           <AnimatedCounter value={value} />
         </h3>
         
-        <p className="text-[11px] font-bold text-zinc-400 uppercase tracking-[0.25em] mb-2">
+        <p className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-[0.25em] mb-2 transition-colors duration-700">
           {label}
         </p>
         
         {suffix && (
-          <p className="text-sm text-zinc-500 font-medium">
+          <p className="text-sm text-slate-500 dark:text-zinc-500 font-medium transition-colors duration-700">
             {suffix}
           </p>
         )}

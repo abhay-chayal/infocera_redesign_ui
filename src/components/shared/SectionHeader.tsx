@@ -7,6 +7,7 @@ interface SectionHeaderProps {
   subtitle?: string | React.ReactNode;
   eyebrow?: string | React.ReactNode;
   eyebrowColor?: string; // Tailwind text color class, e.g., 'text-indigo-400'
+  titleColor?: string;
   align?: 'left' | 'center';
   className?: string; // Optional wrapper class
 }
@@ -16,6 +17,7 @@ export const SectionHeader = ({
   subtitle, 
   eyebrow, 
   eyebrowColor = 'text-zinc-500', 
+  titleColor = 'text-slate-900 dark:text-white',
   align = 'center',
   className = ''
 }: SectionHeaderProps) => {
@@ -42,7 +44,7 @@ export const SectionHeader = ({
       
       <motion.h2 
         variants={fadeInUp}
-        className="text-4xl md:text-6xl font-bold text-white tracking-tighter mb-6 leading-[1.05]"
+        className={`text-4xl md:text-6xl font-bold tracking-tighter mb-6 leading-[1.05] transition-colors duration-700 ${titleColor}`}
       >
         {title}
       </motion.h2>
@@ -50,7 +52,7 @@ export const SectionHeader = ({
       {subtitle && (
         <motion.p 
           variants={fadeInUp}
-          className={`text-lg md:text-xl text-zinc-400 leading-relaxed font-medium ${subtitleMaxWidth}`}
+          className={`text-lg md:text-xl text-slate-600 dark:text-zinc-400 leading-relaxed font-medium transition-colors duration-700 ${subtitleMaxWidth}`}
         >
           {subtitle}
         </motion.p>

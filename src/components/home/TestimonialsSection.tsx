@@ -4,14 +4,14 @@ import { SectionHeader } from '../shared/SectionHeader';
 
 export const TestimonialsSection = () => {
   return (
-    <section className="relative py-24 lg:py-32 bg-black border-t border-white/5 overflow-hidden">
+    <section className="relative py-24 lg:py-32 bg-[#F8F9FA] dark:bg-black border-t border-slate-200 dark:border-white/5 overflow-hidden transition-colors duration-700">
       
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         
         {/* Header */}
         <SectionHeader
           eyebrow="Client Success"
-          eyebrowColor="text-zinc-500"
+          eyebrowColor="text-[#0ea5e9] dark:text-zinc-500"
           title="Trusted by the best."
           subtitle="Don't just take our word for it. Hear from the technology leaders who have partnered with us to completely transform their digital infrastructure."
           align="center"

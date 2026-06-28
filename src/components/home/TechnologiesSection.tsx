@@ -4,17 +4,17 @@ import { SectionHeader } from '../shared/SectionHeader';
 
 export const TechnologiesSection = () => {
   return (
-    <section className="relative py-24 lg:py-32 bg-black border-t border-white/5 overflow-hidden">
+    <section className="relative py-24 lg:py-32 bg-[#F8F9FA] dark:bg-black border-t border-slate-200 dark:border-white/5 overflow-hidden transition-colors duration-700">
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         
         {/* Header */}
         <SectionHeader
           eyebrow="Core Technologies"
-          eyebrowColor="text-zinc-500"
+          eyebrowColor="text-[#0ea5e9] dark:text-zinc-500"
           title={
             <>
               Powered by modern, <br className="hidden md:block" />
-              <span className="text-white">
+              <span className="text-[#0ea5e9] dark:text-white">
                 enterprise-grade stacks.
               </span>
             </>
@@ -42,6 +42,7 @@ export const TechnologiesSection = () => {
                   title={category.title}
                   icon={category.icon}
                   techs={category.techs}
+                  color={category.color}
                 />
               </div>
             );
