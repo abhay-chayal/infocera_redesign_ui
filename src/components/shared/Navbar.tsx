@@ -242,8 +242,21 @@ export const Navbar = () => {
           </Button>
         </div>
 
-        {/* Mobile Hamburger Toggle */}
-        <div className="xl:hidden flex items-center space-x-4">
+        {/* Mobile Nav Actions */}
+        <div className="xl:hidden flex items-center space-x-1 sm:space-x-4">
+          <button
+            onClick={toggleTheme}
+            className={cn(
+              "p-2 rounded-full transition-colors",
+              isTransparentOnHome 
+                ? "text-white hover:bg-white/10" 
+                : "text-slate-600 dark:text-zinc-400 hover:bg-slate-100 dark:hover:bg-white/10"
+            )}
+            aria-label="Toggle theme"
+          >
+            {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+          </button>
+          
           <Button
             variant="ghost"
             size="icon"

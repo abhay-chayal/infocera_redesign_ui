@@ -5,10 +5,20 @@ import { useTheme } from '../../contexts/ThemeContext';
 export const LiquidBackground = () => {
   const { theme } = useTheme();
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Check if mobile on mount and window resize
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return; // Disable heavy mouse tracking on mobile
+    
     const handleMouseMove = (e: MouseEvent) => {
-      // Calculate normalized mouse position (-1 to 1) for smoother parallax
       const x = (e.clientX / window.innerWidth) * 2 - 1;
       const y = (e.clientY / window.innerHeight) * 2 - 1;
       setMousePos({ x, y });
@@ -16,7 +26,7 @@ export const LiquidBackground = () => {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [isMobile]);
 
   const springConfig = { damping: 30, stiffness: 40, mass: 2 };
   
@@ -37,18 +47,23 @@ export const LiquidBackground = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none transition-colors duration-1000 isolate">
       
-      {/* SVG Filter for Liquid "Gooey" Effect */}
-      <svg className="hidden">
-        <defs>
-          <filter id="goo">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="30" result="blur" />
-            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 40 -20" result="goo" />
-            <feBlend in="SourceGraphic" in2="goo" />
-          </filter>
-        </defs>
-      </svg>
+      {/* SVG Filter for Liquid "Gooey" Effect - Only rendered on Desktop for performance */}
+      {!isMobile && (
+        <svg className="hidden">
+          <defs>
+            <filter id="goo">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="30" result="blur" />
+              <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 40 -20" result="goo" />
+              <feBlend in="SourceGraphic" in2="goo" />
+            </filter>
+          </defs>
+        </svg>
+      )}
 
-      <div className="absolute inset-0 w-full h-full opacity-60 dark:opacity-40 mix-blend-multiply dark:mix-blend-screen transition-opacity duration-1000" style={{ filter: 'url(#goo)' }}>
+      <div 
+        className="absolute inset-0 w-full h-full opacity-60 dark:opacity-40 mix-blend-multiply dark:mix-blend-screen transition-opacity duration-1000" 
+        style={!isMobile ? { filter: 'url(#goo)' } : undefined}
+      >
         
         {/* Blob 1: Interacts with pointer */}
         <motion.div 
